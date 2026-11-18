@@ -39,7 +39,7 @@
     { "label": "Trà theo thể trạng", "link": "/#tra-rieng" },
     { "label": "Cách dùng", "link": "/#cach-dung" },
     { "label": "Bài viết", "link": "/bai-viet/" },
-    { "label": "Liên hệ", "link": "/#lien-he" }
+    { "label": "Liên hệ", "link": "/#dat-tra" }
   ],
   "nav_cta": { "label": "Đặt trà ngay", "link": "/#dat-tra" }
 }

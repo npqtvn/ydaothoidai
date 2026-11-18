@@ -12,9 +12,9 @@ backend:
     uploadMedia: "Tải ảnh “{{path}}”"
     deleteMedia: "Xóa ảnh “{{path}}”"
 
-site_url: https://ydaothoidai.com
-display_url: https://ydaothoidai.com
-logo_url: /uploads/logo.png
+site_url: https://npqtvn.github.io/ydaothoidai/   # đổi thành https://ydaothoidai.com khi gán tên miền
+display_url: https://npqtvn.github.io/ydaothoidai/
+logo_url: ../uploads/logo.png
 
 media_folder: public/uploads
 public_folder: /uploads

@@ -18,9 +18,14 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Đang chạy tạm ở https://npqtvn.github.io/ydaothoidai/
+      # Khi gán tên miền ydaothoidai.com: xóa 2 dòng dưới (xem HUONG-DAN.md mục 4)
+      BASE_PATH: /ydaothoidai
+      SITE_URL: https://npqtvn.github.io
     steps:
-      - uses: actions/checkout@v4
-      - uses: withastro/action@v3
+      - uses: actions/checkout@v7
+      - uses: withastro/action@v6
         with:
           node-version: 22
 
@@ -32,4 +37,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

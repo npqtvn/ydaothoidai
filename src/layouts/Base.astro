@@ -8,7 +8,8 @@ const { title, description, image } = Astro.props;
 const t = settings.theme;
 const pageTitle = title ? `${title} | ${settings.site_name}` : settings.seo_title;
 const desc = description || settings.seo_description;
-const ogImage = new URL(image || settings.share_image || settings.logo, Astro.site).href;
+const ogImage = new URL(__BASE_PATH__ + (image || settings.share_image || settings.logo), Astro.site).href;
+const canonical = new URL(__BASE_PATH__ + Astro.url.pathname, Astro.site).href;
 const cssVars = `:root{--primary:${t.primary};--primary-light:${t.primary_light};--accent:${t.accent};--bg:${t.bg};--bg-alt:${t.bg_alt};--text:${t.text};--font-heading:${fontStack(t.heading_font)};--font-body:${fontStack(t.body_font)};--font-script:${fontStack(t.script_font)};--radius:${t.radius}px;--container:${t.container}px;--scale:${(t.font_scale || 100) / 100}}`;
 const year = new Date().getFullYear();
 ---
@@ -19,7 +20,7 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={desc} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" href={settings.logo} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />

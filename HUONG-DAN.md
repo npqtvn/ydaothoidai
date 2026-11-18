@@ -28,17 +28,19 @@ Khi chạy trên máy, trang quản trị có nút **Work with Local Repository*
 
 1. Kho GitHub: https://github.com/npqtvn/ydaothoidai (đã có sẵn code).
 2. Tên kho đã được điền sẵn trong `public/admin/config.yml` (dòng `repo: npqtvn/ydaothoidai`).
-3. Đẩy code lên:
-   ```bash
-   git add -A
-   git commit -m "Website Y Đạo Thời Đại"
-   git remote add origin https://github.com/npqtvn/ydaothoidai.git
-   git push -u origin main
-   ```
-4. Trong kho trên GitHub: **Settings › Pages › Source** chọn **GitHub Actions**. Khoảng 1–2 phút sau web sẽ chạy.
-5. Vẫn ở **Settings › Pages**: ô **Custom domain** nhập `ydaothoidai.com`, bấm Save. Khi DNS đã xong (mục 4), tích **Enforce HTTPS**.
+3. Bật Pages (chỉ làm 1 lần): trong kho trên GitHub, vào **Settings › Pages › Build and deployment › Source** và chọn **GitHub Actions**. **Chưa** điền ô Custom domain.
+4. Vào tab **Actions**, chọn lần chạy gần nhất và bấm **Re-run all jobs**. Khoảng 1–2 phút sau, web chạy tạm tại **https://npqtvn.github.io/ydaothoidai/**
+5. Từ đó trở đi, mỗi lần push code hoặc bấm Save trong /admin, web tự cập nhật.
 
-## 4. Trỏ tên miền ydaothoidai.com (DNS vẫn để ở WordPress.com)
+## 4. Khi đã sẵn sàng gán tên miền ydaothoidai.com
+
+Làm theo thứ tự sau:
+
+1. Trong `.github/workflows/deploy.yml`, xóa 2 dòng `BASE_PATH: /ydaothoidai` và `SITE_URL: https://npqtvn.github.io`.
+2. Trong `public/admin/config.yml`, đổi `site_url` và `display_url` thành `https://ydaothoidai.com`.
+3. Push lên GitHub.
+4. Ở **Settings › Pages**, ô **Custom domain**: nhập `ydaothoidai.com` rồi bấm Save.
+5. Trỏ DNS như hướng dẫn bên dưới. Khi tên miền đã nhận, tích **Enforce HTTPS**.
 
 Vào WordPress.com › **Upgrades › Domains › ydaothoidai.com › DNS records**:
 
@@ -53,7 +55,7 @@ Thường mất từ 15 phút đến vài giờ để tên miền nhận. Sau b�
 
 ## 5. Đăng nhập trang quản trị trên web thật
 
-Vào https://ydaothoidai.com/admin/ và chọn **Sign In Using Access Token**.
+Vào https://npqtvn.github.io/ydaothoidai/admin/ (sau này là https://ydaothoidai.com/admin/) và chọn **Sign In Using Access Token**.
 
 Cách lấy token: GitHub › Settings › Developer settings › **Fine-grained tokens** › Generate new token.
 - Repository access: chỉ chọn kho `npqtvn/ydaothoidai`.
