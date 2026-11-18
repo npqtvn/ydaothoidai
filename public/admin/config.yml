@@ -12,8 +12,8 @@ backend:
     uploadMedia: "Tải ảnh “{{path}}”"
     deleteMedia: "Xóa ảnh “{{path}}”"
 
-site_url: https://npqtvn.github.io/ydaothoidai/   # sau khi gán tên miền, link này tự chuyển sang https://trathaomoc.ydaothoidai.com
-display_url: https://npqtvn.github.io/ydaothoidai/
+site_url: https://trathaomoc.ydaothoidai.com/
+display_url: https://trathaomoc.ydaothoidai.com/
 logo_url: ../uploads/logo.png
 
 media_folder: public/uploads
