@@ -8,7 +8,7 @@ short: Bổ khí, dưỡng huyết, tăng cường sức đề kháng, giúp da 
 tagline: Bổ khí dưỡng huyết, hỗ trợ cải thiện sức khỏe.
 image: /uploads/2.webp
 gallery:
-  - /uploads/tra-bo-khi-huyet-ly.webp
+  - /uploads/chi-tiet-bo-khi-huyet.webp
 price: ''
 price_note: Liên hệ để nhận báo giá
 effects:
