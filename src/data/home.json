@@ -181,13 +181,13 @@
       "items": [
         {
           "title": "Kênh YouTube @Ydaothoidai",
-          "url": "https://www.youtube.com/@Ydaothoidai",
-          "cover": "/uploads/banner-ngang.webp"
+          "url": "https://www.youtube.com/shorts/NkR49vN0bJw",
+          "cover": ""
         },
         {
           "title": "TikTok @ydaothoidai",
-          "url": "https://www.tiktok.com/@ydaothoidai",
-          "cover": "/uploads/tiem-ke-hoa.webp"
+          "url": "https://www.tiktok.com/@ydaothoidai/video/7708000938895887636",
+          "cover": "/uploads/IMG_1790304854769_1791032455304.webp"
         }
       ]
     },
@@ -195,48 +195,48 @@
       "type": "gallery",
       "enabled": true,
       "label": "Hình ảnh",
-      "title": "Không gian Y Đạo Thời Đại",
+      "title": "",
       "anchor": "khong-gian",
       "bg": "default",
       "intro": "",
       "images": [
         {
-          "image": "/uploads/tiem-y-dao.webp",
-          "caption": "Không gian tiệm"
-        },
-        {
           "image": "/uploads/tiem-ke-tra.webp",
-          "caption": "Kệ trà"
+          "caption": ""
         },
         {
           "image": "/uploads/tui-tra-bo-khi-huyet-2.webp",
-          "caption": "Trà Bổ Khí Huyết"
-        },
-        {
-          "image": "/uploads/tiem-goc-tra.webp",
-          "caption": "Góc trà"
+          "caption": "Kệ trà"
         },
         {
           "image": "/uploads/hop-tra-giam-stress.webp",
-          "caption": "Hộp trà"
+          "caption": ""
         },
         {
-          "image": "/uploads/tiem-ban-tra.webp",
-          "caption": "Bàn trà"
+          "image": "/uploads/tiem-goc-tra.webp",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/hop-tra-thiet-ke.webp",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/tra-tu-am-bo-than.webp",
+          "caption": ""
         },
         {
           "image": "/uploads/tra-mau-khay.webp",
-          "caption": "Nguyên liệu"
+          "caption": ""
         },
         {
-          "image": "/uploads/tiem-tu-sach.webp",
-          "caption": "Tủ sách"
+          "image": "/uploads/tra-bo-khi-huyet-ly.webp",
+          "caption": ""
         }
       ]
     },
     {
       "type": "testimonials",
-      "enabled": true,
+      "enabled": false,
       "label": "Cảm nhận",
       "title": "Khách hàng nói gì",
       "anchor": "cam-nhan",
@@ -306,7 +306,7 @@
       "enabled": true,
       "label": "Đặt trà",
       "title": "Đặt trà hoặc nhận tư vấn miễn phí",
-      "image": "/uploads/menu-6-loai-tra.webp",
+      "image": "/uploads/4.webp",
       "anchor": "dat-tra",
       "bg": "dark",
       "text": "Để lại thông tin, chúng tôi sẽ gọi lại xác nhận đơn trong ngày. Hoặc nhắn trực tiếp Zalo để được tư vấn nhanh nhất."
