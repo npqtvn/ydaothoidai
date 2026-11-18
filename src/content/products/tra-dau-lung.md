@@ -8,7 +8,7 @@ short: Hỗ trợ lưu thông khí huyết, giảm đau nhức xương khớp, �
 tagline: Khu phong trừ thấp, bổ Can Thận, ích khí huyết, hỗ trợ giảm đau nhức mỏi vùng lưng eo và khớp.
 image: /uploads/6.webp
 gallery:
-  - /uploads/tra-giam-mo.webp
+  - /uploads/chi-tiet-dau-lung.webp
 price: ''
 price_note: Liên hệ để nhận báo giá
 effects:
