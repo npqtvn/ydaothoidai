@@ -174,20 +174,25 @@
       "type": "video",
       "enabled": true,
       "label": "Video",
-      "title": "Xem Y Đạo Thời Đại trên mạng xã hội",
+      "title": "Y Đạo Thời Đại - Youtube Channel",
       "anchor": "video",
       "bg": "alt",
       "intro": "Dán link video YouTube trong trang quản trị để video hiện ngay tại đây.",
       "items": [
         {
-          "title": "Kênh YouTube @Ydaothoidai",
-          "url": "https://www.youtube.com/shorts/NkR49vN0bJw",
+          "title": "",
+          "url": "https://www.youtube.com/shorts/MrdPkp77eEM",
           "cover": ""
         },
         {
-          "title": "TikTok @ydaothoidai",
+          "title": "https://www.youtube.com/shorts/GYujlUnp4Sc",
           "url": "https://www.tiktok.com/@ydaothoidai/video/7708000938895887636",
-          "cover": "/uploads/IMG_1790304854769_1791032455304.webp"
+          "cover": ""
+        },
+        {
+          "title": "",
+          "url": "https://www.youtube.com/shorts/kflsFbNYRAA",
+          "cover": ""
         }
       ]
     },
