@@ -8,94 +8,122 @@
       "title": "Trà Thảo Mộc",
       "script_title": "Thanh lọc cơ thể — Sống khỏe mỗi ngày",
       "subtitle": "6 dòng trà bào chế theo phương pháp Y học cổ truyền, cùng trà phối riêng theo đúng thể trạng của bạn. Không chất bảo quản, không hương liệu nhân tạo.",
-      "image": "/uploads/hero-tui-tra-bo-khi-huyet.webp",
-      "bg_image": "/uploads/tiem-y-dao.webp",
+      "image": "/uploads/8.webp",
+      "bg_image": "/uploads/bat-mach.webp",
       "button_text": "Đặt trà ngay",
       "button_link": "#dat-tra",
       "button2_text": "Tư vấn qua Zalo",
       "button2_link": "zalo",
-      "badges": ["Handmade", "Không chất bảo quản", "Bắt mạch miễn phí"]
+      "badges": [
+        "Handmade",
+        "Không chất bảo quản",
+        "Bắt mạch miễn phí"
+      ]
     },
     {
       "type": "features",
       "enabled": true,
+      "label": "Giới thiệu",
+      "title": "Trà Thảo Mộc khác biệt trên thị trường",
+      "image": "/uploads/nguyen-lieu-bo-khi-huyet.webp",
       "anchor": "gioi-thieu",
       "bg": "default",
       "style": "numbered",
-      "label": "Giới thiệu",
-      "title": "Trà Thảo Mộc khác biệt trên thị trường",
       "intro": "Không chỉ là một thức uống, trà thảo mộc của Y Đạo Thời Đại là sự kết tinh của thiên nhiên, truyền thống và tâm huyết vì sức khỏe cộng đồng.",
-      "image": "/uploads/nguyen-lieu-bo-khi-huyet.webp",
       "items": [
         {
           "title": "100% thảo mộc tự nhiên",
           "text": "Chọn lọc từ những thảo dược quý, an toàn, thuần khiết từ thiên nhiên.",
-          "points": ["Dược liệu rõ nguồn gốc", "Phối theo bài thuốc Y học cổ truyền", "Làm thủ công (handmade) từng mẻ nhỏ"]
+          "points": [
+            "Dược liệu rõ nguồn gốc",
+            "Phối theo bài thuốc Y học cổ truyền",
+            "Làm thủ công (handmade) từng mẻ nhỏ"
+          ]
         },
         {
           "title": "Không chất bảo quản",
           "text": "Không phụ gia, không hương liệu nhân tạo, giữ trọn tinh túy tự nhiên.",
-          "points": ["Túi lọc tiện dụng, túi zip chống ẩm", "Hương vị thảo mộc tự nhiên, dễ uống", "Bào chế đúng phương pháp"]
+          "points": [
+            "Túi lọc tiện dụng, túi zip chống ẩm",
+            "Hương vị thảo mộc tự nhiên, dễ uống",
+            "Bào chế đúng phương pháp"
+          ]
         },
         {
           "title": "Do Lương y trực tiếp phối",
           "text": "Mỗi công thức do Lương y – Dược sĩ Tuấn Nguyễn trực tiếp nghiên cứu và phối hợp.",
-          "points": ["Kết hợp Đông – Tây y", "Có thể phối riêng theo thể trạng", "Bắt mạch, tư vấn miễn phí"]
+          "points": [
+            "Kết hợp Đông – Tây y",
+            "Có thể phối riêng theo thể trạng",
+            "Bắt mạch, tư vấn miễn phí"
+          ]
         }
       ]
     },
     {
       "type": "products",
       "enabled": true,
-      "anchor": "san-pham",
-      "bg": "alt",
       "label": "Sản phẩm",
       "title": "6 loại trà — 6 công dụng",
+      "anchor": "san-pham",
+      "bg": "alt",
       "intro": "Mỗi dòng trà là một bài thuốc cổ phương được gia giảm cho phù hợp với người Việt. Bấm vào từng loại để xem tác dụng và các vị thuốc trong bài.",
       "columns": "3"
     },
     {
       "type": "custom",
       "enabled": true,
-      "anchor": "tra-rieng",
-      "bg": "dark",
       "label": "Đặc biệt",
       "title": "Trà phối riêng theo thể trạng của bạn",
+      "image": "/uploads/IMG_1790304851584_1791032456168.webp",
+      "button_text": "Đăng ký trà riêng",
+      "button_link": "#dat-tra",
+      "anchor": "tra-rieng",
+      "bg": "dark",
       "text": "Mỗi người một cơ địa. Bên cạnh 6 dòng trà sẵn có, Y Đạo Thời Đại nhận bắt mạch, hỏi bệnh và phối trà riêng theo đúng thể trạng, nhu cầu của từng khách hàng.",
       "points": [
         "Bắt mạch, tư vấn miễn phí tại tiệm hoặc qua Zalo",
         "Gia giảm vị thuốc theo cơ địa hàn – nhiệt, hư – thực",
         "Theo dõi và điều chỉnh công thức sau mỗi liệu trình"
-      ],
-      "image": "/uploads/bat-mach.webp",
-      "button_text": "Đăng ký trà riêng",
-      "button_link": "#dat-tra"
+      ]
     },
     {
       "type": "about",
       "enabled": true,
-      "anchor": "luong-y",
-      "bg": "default",
       "label": "Người bào chế",
       "title": "Lương Y – Dược Sĩ Tuấn Nguyễn",
+      "image": "/uploads/IMG_1790304854769_1791032455304.webp",
+      "anchor": "luong-y",
+      "bg": "default",
       "text": "Kết hợp Đông – Tây y vào điều trị, sử dụng các biện pháp **không xâm lấn**: chẩn mạch, châm cứu, bấm huyệt, thực dưỡng, đắp cao và Trà Thảo Mộc.\n\nY Đạo Thời Đại có mặt trên Facebook, YouTube, TikTok và Zalo với tên **@ydaothoidai**, chia sẻ kiến thức Y học cổ truyền dễ hiểu, dễ áp dụng mỗi ngày.",
-      "image": "/uploads/luong-y-tuan-nguyen.webp",
       "stats": [
-        { "number": "6", "unit": "dòng trà", "text": "Bài thuốc cổ phương gia giảm" },
-        { "number": "100%", "unit": "", "text": "Thảo mộc tự nhiên" },
-        { "number": "0đ", "unit": "", "text": "Bắt mạch, tư vấn" }
+        {
+          "number": "6",
+          "unit": "dòng trà",
+          "text": "Bài thuốc cổ phương gia giảm"
+        },
+        {
+          "number": "100%",
+          "unit": "",
+          "text": "Thảo mộc tự nhiên"
+        },
+        {
+          "number": "0đ",
+          "unit": "",
+          "text": "Bắt mạch, tư vấn"
+        }
       ]
     },
     {
       "type": "features",
       "enabled": true,
+      "label": "Thông điệp từ tâm",
+      "title": "Giữ lại giá trị thật cho người dùng",
+      "image": "",
       "anchor": "thong-diep",
       "bg": "alt",
       "style": "cards",
-      "label": "Thông điệp từ tâm",
-      "title": "Giữ lại giá trị thật cho người dùng",
       "intro": "",
-      "image": "",
       "items": [
         {
           "title": "Tối giản bao bì, giữ giá trị thật",
@@ -117,97 +145,171 @@
     {
       "type": "steps",
       "enabled": true,
-      "anchor": "cach-dung",
-      "bg": "default",
       "label": "Hướng dẫn sử dụng",
       "title": "Trọn vẹn tinh hoa trong từng tách trà",
-      "intro": "",
       "image": "/uploads/huong-dan-su-dung.webp",
+      "anchor": "cach-dung",
+      "bg": "default",
+      "intro": "",
       "items": [
-        { "title": "Chuẩn bị", "text": "Chỉ với 1–2 túi trà (tùy nhu cầu cơ thể) mỗi ngày, bạn đã sẵn sàng bắt đầu hành trình sức khỏe của mình." },
-        { "title": "Pha trà", "text": "Cho túi trà vào bình cách nhiệt hoặc bình, ấm… Dùng nước sôi hãm trà hoặc đun sôi 10–15 phút." },
-        { "title": "Ủ trà", "text": "Ủ trà để đánh thức toàn bộ dưỡng chất, hoặc kiên nhẫn nấu sôi với lửa nhỏ để có ngay một bình trà thơm lành." },
-        { "title": "Thưởng trà", "text": "Khi trà đã nhạt, chỉ cần châm thêm nước sôi và tiếp tục tận hưởng sự thư thái." }
+        {
+          "title": "Chuẩn bị",
+          "text": "Chỉ với 1–2 túi trà (tùy nhu cầu cơ thể) mỗi ngày, bạn đã sẵn sàng bắt đầu hành trình sức khỏe của mình."
+        },
+        {
+          "title": "Pha trà",
+          "text": "Cho túi trà vào bình cách nhiệt hoặc bình, ấm… Dùng nước sôi hãm trà hoặc đun sôi 10–15 phút."
+        },
+        {
+          "title": "Ủ trà",
+          "text": "Ủ trà để đánh thức toàn bộ dưỡng chất, hoặc kiên nhẫn nấu sôi với lửa nhỏ để có ngay một bình trà thơm lành."
+        },
+        {
+          "title": "Thưởng trà",
+          "text": "Khi trà đã nhạt, chỉ cần châm thêm nước sôi và tiếp tục tận hưởng sự thư thái."
+        }
       ]
     },
     {
       "type": "video",
       "enabled": true,
-      "anchor": "video",
-      "bg": "alt",
       "label": "Video",
       "title": "Xem Y Đạo Thời Đại trên mạng xã hội",
+      "anchor": "video",
+      "bg": "alt",
       "intro": "Dán link video YouTube trong trang quản trị để video hiện ngay tại đây.",
       "items": [
-        { "title": "Kênh YouTube @Ydaothoidai", "url": "https://www.youtube.com/@Ydaothoidai", "cover": "/uploads/banner-ngang.webp" },
-        { "title": "TikTok @ydaothoidai", "url": "https://www.tiktok.com/@ydaothoidai", "cover": "/uploads/tiem-ke-hoa.webp" }
+        {
+          "title": "Kênh YouTube @Ydaothoidai",
+          "url": "https://www.youtube.com/@Ydaothoidai",
+          "cover": "/uploads/banner-ngang.webp"
+        },
+        {
+          "title": "TikTok @ydaothoidai",
+          "url": "https://www.tiktok.com/@ydaothoidai",
+          "cover": "/uploads/tiem-ke-hoa.webp"
+        }
       ]
     },
     {
       "type": "gallery",
       "enabled": true,
-      "anchor": "khong-gian",
-      "bg": "default",
       "label": "Hình ảnh",
       "title": "Không gian Y Đạo Thời Đại",
+      "anchor": "khong-gian",
+      "bg": "default",
       "intro": "",
       "images": [
-        { "image": "/uploads/tiem-y-dao.webp", "caption": "Không gian tiệm" },
-        { "image": "/uploads/tiem-ke-tra.webp", "caption": "Kệ trà" },
-        { "image": "/uploads/tui-tra-bo-khi-huyet-2.webp", "caption": "Trà Bổ Khí Huyết" },
-        { "image": "/uploads/tiem-goc-tra.webp", "caption": "Góc trà" },
-        { "image": "/uploads/hop-tra-giam-stress.webp", "caption": "Hộp trà" },
-        { "image": "/uploads/tiem-ban-tra.webp", "caption": "Bàn trà" },
-        { "image": "/uploads/tra-mau-khay.webp", "caption": "Nguyên liệu" },
-        { "image": "/uploads/tiem-tu-sach.webp", "caption": "Tủ sách" }
+        {
+          "image": "/uploads/tiem-y-dao.webp",
+          "caption": "Không gian tiệm"
+        },
+        {
+          "image": "/uploads/tiem-ke-tra.webp",
+          "caption": "Kệ trà"
+        },
+        {
+          "image": "/uploads/tui-tra-bo-khi-huyet-2.webp",
+          "caption": "Trà Bổ Khí Huyết"
+        },
+        {
+          "image": "/uploads/tiem-goc-tra.webp",
+          "caption": "Góc trà"
+        },
+        {
+          "image": "/uploads/hop-tra-giam-stress.webp",
+          "caption": "Hộp trà"
+        },
+        {
+          "image": "/uploads/tiem-ban-tra.webp",
+          "caption": "Bàn trà"
+        },
+        {
+          "image": "/uploads/tra-mau-khay.webp",
+          "caption": "Nguyên liệu"
+        },
+        {
+          "image": "/uploads/tiem-tu-sach.webp",
+          "caption": "Tủ sách"
+        }
       ]
     },
     {
       "type": "testimonials",
       "enabled": true,
-      "anchor": "cam-nhan",
-      "bg": "alt",
       "label": "Cảm nhận",
       "title": "Khách hàng nói gì",
+      "anchor": "cam-nhan",
+      "bg": "alt",
       "items": [
-        { "name": "Khách hàng mẫu 1", "info": "Nội dung mẫu — thay bằng cảm nhận thật", "text": "Uống Trà Bổ Khí Huyết được vài tuần thấy người nhẹ nhõm, ngủ ngon hơn. Trà thơm, dễ uống." },
-        { "name": "Khách hàng mẫu 2", "info": "Nội dung mẫu — thay bằng cảm nhận thật", "text": "Được Lương y bắt mạch và phối trà riêng, tư vấn rất kỹ và tận tâm." },
-        { "name": "Khách hàng mẫu 3", "info": "Nội dung mẫu — thay bằng cảm nhận thật", "text": "Đóng gói đơn giản nhưng chắc chắn, túi lọc tiện mang đi làm." }
+        {
+          "text": "Uống Trà Bổ Khí Huyết được vài tuần thấy người nhẹ nhõm, ngủ ngon hơn. Trà thơm, dễ uống.",
+          "name": "Khách hàng mẫu 1",
+          "info": "Nội dung mẫu — thay bằng cảm nhận thật",
+          "avatar": ""
+        },
+        {
+          "text": "Được Lương y bắt mạch và phối trà riêng, tư vấn rất kỹ và tận tâm.",
+          "name": "Khách hàng mẫu 2",
+          "info": "Nội dung mẫu — thay bằng cảm nhận thật",
+          "avatar": ""
+        },
+        {
+          "text": "Đóng gói đơn giản nhưng chắc chắn, túi lọc tiện mang đi làm.",
+          "name": "Khách hàng mẫu 3",
+          "info": "Nội dung mẫu — thay bằng cảm nhận thật",
+          "avatar": ""
+        }
       ]
     },
     {
       "type": "faq",
       "enabled": true,
-      "anchor": "hoi-dap",
-      "bg": "default",
       "label": "Hỏi đáp",
       "title": "Câu hỏi thường gặp",
+      "anchor": "hoi-dap",
+      "bg": "default",
       "items": [
-        { "q": "Tôi nên chọn loại trà nào?", "a": "Bạn xem phần “Phù hợp với” trong từng loại trà, hoặc nhắn Zalo để được Lương y tư vấn miễn phí. Nếu thể trạng đặc biệt, nên chọn trà phối riêng." },
-        { "q": "Mỗi ngày uống bao nhiêu?", "a": "Thông thường 1–2 túi trà mỗi ngày, hãm hoặc đun sôi 10–15 phút. Liều cụ thể tùy thể trạng, bạn nên hỏi thêm khi đặt hàng." },
-        { "q": "Phụ nữ mang thai, trẻ nhỏ có dùng được không?", "a": "Phụ nữ mang thai, cho con bú, trẻ nhỏ và người đang dùng thuốc điều trị vui lòng liên hệ để được tư vấn trước khi dùng." },
-        { "q": "Bảo quản trà thế nào?", "a": "Để nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp. Đóng kín túi zip sau mỗi lần dùng." },
-        { "q": "Đặt hàng và giao hàng ra sao?", "a": "Điền form đặt trà hoặc nhắn Zalo 0979 098 191. Chúng tôi xác nhận đơn, báo phí ship và giao toàn quốc." }
+        {
+          "q": "Tôi nên chọn loại trà nào?",
+          "a": "Bạn xem phần “Phù hợp với” trong từng loại trà, hoặc nhắn Zalo để được Lương y tư vấn miễn phí. Nếu thể trạng đặc biệt, nên chọn trà phối riêng."
+        },
+        {
+          "q": "Mỗi ngày uống bao nhiêu?",
+          "a": "Thông thường 1–2 túi trà mỗi ngày, hãm hoặc đun sôi 10–15 phút. Liều cụ thể tùy thể trạng, bạn nên hỏi thêm khi đặt hàng."
+        },
+        {
+          "q": "Phụ nữ mang thai, trẻ nhỏ có dùng được không?",
+          "a": "Phụ nữ mang thai, cho con bú, trẻ nhỏ và người đang dùng thuốc điều trị vui lòng liên hệ để được tư vấn trước khi dùng."
+        },
+        {
+          "q": "Bảo quản trà thế nào?",
+          "a": "Để nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp. Đóng kín túi zip sau mỗi lần dùng."
+        },
+        {
+          "q": "Đặt hàng và giao hàng ra sao?",
+          "a": "Điền form đặt trà hoặc nhắn Zalo 0979 098 191. Chúng tôi xác nhận đơn, báo phí ship và giao toàn quốc."
+        }
       ]
     },
     {
       "type": "posts",
       "enabled": true,
-      "anchor": "bai-viet",
-      "bg": "alt",
       "label": "Kiến thức",
       "title": "Bài viết mới",
+      "anchor": "bai-viet",
+      "bg": "alt",
       "count": 3
     },
     {
       "type": "contact",
       "enabled": true,
-      "anchor": "dat-tra",
-      "bg": "dark",
       "label": "Đặt trà",
       "title": "Đặt trà hoặc nhận tư vấn miễn phí",
-      "text": "Để lại thông tin, chúng tôi sẽ gọi lại xác nhận đơn trong ngày. Hoặc nhắn trực tiếp Zalo để được tư vấn nhanh nhất.",
-      "image": "/uploads/menu-6-loai-tra.webp"
+      "image": "/uploads/menu-6-loai-tra.webp",
+      "anchor": "dat-tra",
+      "bg": "dark",
+      "text": "Để lại thông tin, chúng tôi sẽ gọi lại xác nhận đơn trong ngày. Hoặc nhắn trực tiếp Zalo để được tư vấn nhanh nhất."
     }
   ]
 }
