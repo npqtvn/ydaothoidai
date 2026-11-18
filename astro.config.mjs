@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 //  - chưa gán tên miền: BASE_PATH=/ydaothoidai, SITE_URL=https://npqtvn.github.io
 //  - đã gán trathaomoc.ydaothoidai.com: BASE_PATH rỗng
 const BASE_PATH = (process.env.BASE_PATH || '').replace(/\/$/, '');
-const SITE_URL = process.env.SITE_URL || 'https://trathaomoc.ydaothoidai.com';
+const SITE_URL = (process.env.SITE_URL || 'https://trathaomoc.ydaothoidai.com').replace(/^http:/, 'https:');
 
 // Khi chạy thử trên máy: mở /admin/ sẽ vào thẳng trang quản trị (public/admin/index.html)
 const adminIndex = {
