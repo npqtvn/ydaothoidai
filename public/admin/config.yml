@@ -1,4 +1,4 @@
-# Cấu hình trang quản trị (Sveltia CMS) cho ydaothoidai.com
+# Cấu hình trang quản trị (Sveltia CMS) cho trathaomoc.ydaothoidai.com
 # Kho GitHub chứa website: https://github.com/npqtvn/ydaothoidai
 
 backend:
@@ -12,7 +12,7 @@ backend:
     uploadMedia: "Tải ảnh “{{path}}”"
     deleteMedia: "Xóa ảnh “{{path}}”"
 
-site_url: https://npqtvn.github.io/ydaothoidai/   # đổi thành https://ydaothoidai.com khi gán tên miền
+site_url: https://npqtvn.github.io/ydaothoidai/   # sau khi gán tên miền, link này tự chuyển sang https://trathaomoc.ydaothoidai.com
 display_url: https://npqtvn.github.io/ydaothoidai/
 logo_url: ../uploads/logo.png
 
@@ -210,6 +210,25 @@ collections:
                       - { name: title, label: "Tiêu đề", widget: string, required: false }
                       - { name: url, label: "Link (YouTube sẽ phát ngay trên web; TikTok/Facebook sẽ mở tab mới)", widget: string }
                       - { name: cover, label: "Ảnh bìa (YouTube tự lấy nếu để trống)", widget: image, required: false }
+
+              - name: shorts
+                label: "YouTube Shorts (tự cập nhật)"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - *f_intro
+                  - name: channel_id
+                    label: "Mã kênh YouTube (bắt đầu bằng UC…)"
+                    hint: "Short mới đăng sẽ tự hiện trên web trong vòng khoảng 2 giờ."
+                    widget: string
+                    default: "UChcZ-Nwuhs50WIaKGd1tA_Q"
+                  - { name: count, label: "Số video hiển thị", widget: number, value_type: int, min: 1, max: 15, default: 8 }
+                  - { name: button_label, label: "Chữ trên nút xem thêm (để trống để ẩn nút)", widget: string, required: false }
+                  - { name: button_link, label: "Link nút xem thêm", widget: string, required: false }
 
               - name: gallery
                 label: "Thư viện ảnh"

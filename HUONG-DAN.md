@@ -32,30 +32,31 @@ Khi chạy trên máy, trang quản trị có nút **Work with Local Repository*
 4. Vào tab **Actions**, chọn lần chạy gần nhất và bấm **Re-run all jobs**. Khoảng 1–2 phút sau, web chạy tạm tại **https://npqtvn.github.io/ydaothoidai/**
 5. Từ đó trở đi, mỗi lần push code hoặc bấm Save trong /admin, web tự cập nhật.
 
-## 4. Khi đã sẵn sàng gán tên miền ydaothoidai.com
+## 4. Gán tên miền trathaomoc.ydaothoidai.com
 
-Làm theo thứ tự sau:
+Trang chính ydaothoidai.com vẫn để ở WordPress.com, còn web trà chạy ở tên miền con **trathaomoc.ydaothoidai.com**. Không cần sửa code: mỗi lần build, GitHub tự đọc địa chỉ trong Settings › Pages.
 
-1. Trong `.github/workflows/deploy.yml`, xóa 2 dòng `BASE_PATH: /ydaothoidai` và `SITE_URL: https://npqtvn.github.io`.
-2. Trong `public/admin/config.yml`, đổi `site_url` và `display_url` thành `https://ydaothoidai.com`.
-3. Push lên GitHub.
-4. Ở **Settings › Pages**, ô **Custom domain**: nhập `ydaothoidai.com` rồi bấm Save.
-5. Trỏ DNS như hướng dẫn bên dưới. Khi tên miền đã nhận, tích **Enforce HTTPS**.
+1. Vào WordPress.com › **Upgrades › Domains › ydaothoidai.com › DNS records**, thêm 1 bản ghi:
+   - Type **CNAME** · Name `trathaomoc` · Value `npqtvn.github.io`
+   - Không xóa hay sửa bản ghi nào khác, để trang WordPress vẫn chạy bình thường.
+2. Đợi 10–30 phút, rồi vào kho GitHub › **Settings › Pages › Custom domain**, nhập `trathaomoc.ydaothoidai.com` và bấm **Save**. Đợi đến khi hiện dấu ✓ “DNS check successful”.
+3. Vào tab **Actions**, chọn “Đăng website lên GitHub Pages”, bấm **Run workflow** để build lại theo địa chỉ mới.
+4. Khi ô **Enforce HTTPS** bấm được (có thể mất tới vài giờ), hãy tích vào ô đó.
+5. Trên WordPress.com, thêm một mục menu “Trà Thảo Mộc” trỏ tới https://trathaomoc.ydaothoidai.com
 
-Vào WordPress.com › **Upgrades › Domains › ydaothoidai.com › DNS records**:
+Từ đó, địa chỉ cũ npqtvn.github.io/ydaothoidai sẽ tự chuyển sang tên miền mới. Trang quản trị cũng chuyển sang https://trathaomoc.ydaothoidai.com/admin/
 
-- Xóa các bản ghi **A** đang có cho tên miền gốc (nếu có).
-- Thêm 4 bản ghi **A**, phần Name để trống (hoặc `@`):
-  `185.199.108.153` · `185.199.109.153` · `185.199.110.153` · `185.199.111.153`
-- Thêm 1 bản ghi **CNAME**: Name `www`, giá trị `npqtvn.github.io`
+> Không làm được dạng ydaothoidai.com/trathaomoc, vì DNS chỉ trỏ được cả tên miền về một nơi, không chia theo đường dẫn.
 
-Thường mất từ 15 phút đến vài giờ để tên miền nhận. Sau bước này, trang cũ trên WordPress.com sẽ không còn hiện ở ydaothoidai.com nữa.
+## 4b. YouTube Shorts tự cập nhật
 
-> Muốn dùng Cloudflare Pages thay cho GitHub Pages: Cloudflare chỉ gắn được tên miền gốc `ydaothoidai.com` khi bạn chuyển nameserver sang Cloudflare. Nếu vẫn giữ DNS ở WordPress.com như hiện nay, GitHub Pages là lựa chọn gọn nhất.
+Khối **YouTube Shorts (tự cập nhật)** trên trang chủ tự lấy các Short mới nhất của kênh. Web tự build lại mỗi 2 giờ, nên Short mới đăng sẽ hiện trên web trong vòng khoảng 2 giờ. Muốn hiện ngay thì vào **Actions › Run workflow**.
+
+Lưu ý: GitHub sẽ tạm dừng lịch tự build nếu kho không có thay đổi nào trong 60 ngày. Khi đó GitHub gửi email báo; bạn bấm **Enable workflow** trong tab Actions là được. Chỉ cần thỉnh thoảng bấm Save trong /admin thì lịch sẽ không bị dừng.
 
 ## 5. Đăng nhập trang quản trị trên web thật
 
-Vào https://npqtvn.github.io/ydaothoidai/admin/ (sau này là https://ydaothoidai.com/admin/) và chọn **Sign In Using Access Token**.
+Vào https://npqtvn.github.io/ydaothoidai/admin/ (sau này là https://trathaomoc.ydaothoidai.com/admin/) và chọn **Sign In Using Access Token**.
 
 Cách lấy token: GitHub › Settings › Developer settings › **Fine-grained tokens** › Generate new token.
 - Repository access: chỉ chọn kho `npqtvn/ydaothoidai`.

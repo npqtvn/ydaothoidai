@@ -1,0 +1,88 @@
+---
+// Khối "YouTube Shorts": tự lấy các Short mới nhất của kênh mỗi lần web build lại.
+import SectionHead from '../SectionHead.astro';
+import Icon from '../Icon.astro';
+import { getShorts } from '../../lib/youtube';
+const { s } = Astro.props;
+const channelId = (s.channel_id || '').trim();
+const count = Math.max(1, Number(s.count) || 8);
+const shorts = (await getShorts(channelId)).slice(0, count);
+const moreUrl = s.button_link || `https://www.youtube.com/channel/${channelId}/shorts`;
+---
+{shorts.length > 0 && (
+  <>
+    <SectionHead label={s.label} title={s.title} intro={s.intro} />
+    <div class="shorts">
+      {shorts.map((v) => (
+        <figure class="short reveal">
+          <button class="sthumb" data-yt={v.id} aria-label={`Phát video: ${v.title}`}>
+            <img
+              src={v.thumb}
+              alt=""
+              loading="lazy"
+              onerror={`this.onerror=null;this.src='https://i.ytimg.com/vi/${v.id}/hqdefault.jpg'`}
+            />
+            <span class="splay"><Icon name="play" /></span>
+          </button>
+          <figcaption>{v.title}</figcaption>
+        </figure>
+      ))}
+    </div>
+    {s.button_label && (
+      <p class="smore">
+        <a class="btn btn-outline" href={moreUrl} target="_blank" rel="noopener">{s.button_label} <Icon name="arrow" /></a>
+      </p>
+    )}
+  </>
+)}
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('button.sthumb[data-yt]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = `https://www.youtube-nocookie.com/embed/${b.dataset.yt}?autoplay=1&rel=0&playsinline=1`;
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      f.title = 'Video';
+      f.className = 'sframe';
+      b.replaceWith(f);
+    })
+  );
+</script>
+
+<style>
+  .shorts {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;
+  }
+  .short { margin: 0; min-width: 0; }
+  .sthumb, .short :global(.sframe) {
+    display: block; position: relative; width: 100%; aspect-ratio: 9/16; border: 0; padding: 0; cursor: pointer;
+    border-radius: var(--radius); overflow: hidden; background: var(--primary);
+  }
+  .sthumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s, opacity .3s; opacity: .92; }
+  .sthumb:hover img { transform: scale(1.04); opacity: 1; }
+  .sthumb::after {
+    content: ''; position: absolute; inset: auto 0 0; height: 40%;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .35)); pointer-events: none;
+  }
+  .splay {
+    position: absolute; inset: 0; margin: auto; width: 60px; height: 60px; border-radius: 50%; z-index: 1;
+    background: var(--accent); color: #fff; display: grid; place-items: center; box-shadow: 0 0 0 8px rgba(255, 255, 255, .25);
+  }
+  .splay :global(svg) { width: 26px; height: 26px; margin-left: 4px; }
+  figcaption {
+    margin-top: 10px; font-weight: 600; color: var(--primary); font-size: .95rem; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .smore { text-align: center; margin: 32px 0 0; }
+
+  /* Điện thoại: vuốt ngang */
+  @media (max-width: 720px) {
+    .shorts {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px;
+      margin: 0 -16px; padding: 0 16px 8px; scrollbar-width: none;
+    }
+    .shorts::-webkit-scrollbar { display: none; }
+    .short { flex: 0 0 62%; scroll-snap-align: start; }
+  }
+</style>

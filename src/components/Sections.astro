@@ -7,6 +7,7 @@ import Custom from './sections/Custom.astro';
 import About from './sections/About.astro';
 import Steps from './sections/Steps.astro';
 import Video from './sections/Video.astro';
+import Shorts from './sections/Shorts.astro';
 import Gallery from './sections/Gallery.astro';
 import Testimonials from './sections/Testimonials.astro';
 import Faq from './sections/Faq.astro';
@@ -16,7 +17,7 @@ import RichText from './sections/RichText.astro';
 import Banner from './sections/Banner.astro';
 
 const MAP: Record<string, any> = {
-  features: Features, products: Products, custom: Custom, about: About, steps: Steps, video: Video,
+  features: Features, products: Products, custom: Custom, about: About, steps: Steps, video: Video, shorts: Shorts,
   gallery: Gallery, testimonials: Testimonials, faq: Faq, posts: Posts, contact: Contact, richtext: RichText, banner: Banner,
 };
 const { sections = [] } = Astro.props as { sections: any[] };

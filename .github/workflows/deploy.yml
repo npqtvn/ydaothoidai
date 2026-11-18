@@ -1,9 +1,12 @@
 # Mỗi lần bạn bấm "Lưu" trong trang quản trị (hoặc push code), GitHub tự build và đăng web lên GitHub Pages.
+# Ngoài ra web tự build lại mỗi 2 giờ để cập nhật YouTube Shorts mới nhất.
 name: Đăng website lên GitHub Pages
 
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "17 */2 * * *"
   workflow_dispatch:
 
 permissions:
@@ -18,12 +21,16 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      # Đang chạy tạm ở https://npqtvn.github.io/ydaothoidai/
-      # Khi gán tên miền ydaothoidai.com: xóa 2 dòng dưới (xem HUONG-DAN.md mục 4)
-      BASE_PATH: /ydaothoidai
-      SITE_URL: https://npqtvn.github.io
     steps:
+      # Đọc địa chỉ web từ Settings › Pages:
+      #  - chưa gán tên miền  -> https://npqtvn.github.io  + đường dẫn con /ydaothoidai
+      #  - đã gán tên miền    -> https://trathaomoc.ydaothoidai.com  (không có đường dẫn con)
+      - id: pages
+        uses: actions/configure-pages@v6
+      - run: |
+          echo "BASE_PATH=${{ steps.pages.outputs.base_path }}" >> "$GITHUB_ENV"
+          echo "SITE_URL=${{ steps.pages.outputs.origin }}" >> "$GITHUB_ENV"
+          echo "Địa chỉ web: ${{ steps.pages.outputs.base_url }}"
       - uses: actions/checkout@v7
       - uses: withastro/action@v6
         with:

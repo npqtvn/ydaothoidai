@@ -3,10 +3,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// Web đang chạy tạm ở https://npqtvn.github.io/ydaothoidai/ → mọi đường dẫn cần thêm "/ydaothoidai" phía trước.
-// Hai biến này được đặt trong .github/workflows/deploy.yml. Khi chuyển sang ydaothoidai.com thì xóa chúng đi.
+// Đường dẫn con và địa chỉ web do .github/workflows/deploy.yml đọc từ Settings › Pages:
+//  - chưa gán tên miền: BASE_PATH=/ydaothoidai, SITE_URL=https://npqtvn.github.io
+//  - đã gán trathaomoc.ydaothoidai.com: BASE_PATH rỗng
 const BASE_PATH = (process.env.BASE_PATH || '').replace(/\/$/, '');
-const SITE_URL = process.env.SITE_URL || 'https://ydaothoidai.com';
+const SITE_URL = process.env.SITE_URL || 'https://trathaomoc.ydaothoidai.com';
 
 // Khi chạy thử trên máy: mở /admin/ sẽ vào thẳng trang quản trị (public/admin/index.html)
 const adminIndex = {
