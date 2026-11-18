@@ -8,7 +8,7 @@ short: Giúp giải cảm, giảm nghẹt mũi, đau đầu, sốt nhẹ do cả
 tagline: Giải cơ, phát hãn, giảm các triệu chứng cảm phong hàn kèm đau cứng vùng cổ gáy.
 image: /uploads/3.webp
 gallery:
-  - /uploads/tra-mau-khay.webp
+  - /uploads/chi-tiet-giai-cam.webp
 price: ''
 price_note: Liên hệ để nhận báo giá
 effects:
