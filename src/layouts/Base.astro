@@ -1,0 +1,117 @@
+---
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import { settings, fontsHref, fontStack, resolveLink } from '../lib/site';
+
+interface Props { title?: string; description?: string; image?: string }
+const { title, description, image } = Astro.props;
+const t = settings.theme;
+const pageTitle = title ? `${title} | ${settings.site_name}` : settings.seo_title;
+const desc = description || settings.seo_description;
+const ogImage = new URL(image || settings.share_image || settings.logo, Astro.site).href;
+const cssVars = `:root{--primary:${t.primary};--primary-light:${t.primary_light};--accent:${t.accent};--bg:${t.bg};--bg-alt:${t.bg_alt};--text:${t.text};--font-heading:${fontStack(t.heading_font)};--font-body:${fontStack(t.body_font)};--font-script:${fontStack(t.script_font)};--radius:${t.radius}px;--container:${t.container}px;--scale:${(t.font_scale || 100) / 100}}`;
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" href={settings.logo} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="theme-color" content={t.primary} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={fontsHref([t.heading_font, t.body_font, t.script_font])} />
+    <style set:html={cssVars}></style>
+  </head>
+  <body>
+    <header class={`site-header ${t.header_style === 'dark' ? 'dark' : 'light'}`} id="top">
+      <div class="container header-inner">
+        <a class="brand" href="/">
+          <img src={settings.logo} alt="" width="48" height="48" />
+          <span class="brand-name">{settings.site_name}<small>Trà Thảo Mộc</small></span>
+        </a>
+        <button class="nav-toggle" aria-label="Mở menu" aria-expanded="false"><Icon name="menu" /></button>
+        <nav class="main-nav" aria-label="Menu chính">
+          {settings.nav.map((n) => <a href={resolveLink(n.link)}>{n.label}</a>)}
+          {settings.nav_cta?.label && <a class="btn btn-accent" href={resolveLink(settings.nav_cta.link)}>{settings.nav_cta.label}</a>}
+        </nav>
+      </div>
+    </header>
+
+    <main><slot /></main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand"><img src={settings.logo} alt="" width="56" height="56" /><strong>{settings.site_name}</strong></div>
+            <p>{settings.tagline}</p>
+            <p>{settings.owner}</p>
+            <div class="socials">
+              {settings.facebook && <a href={settings.facebook} target="_blank" rel="noopener">Facebook</a>}
+              {settings.youtube && <a href={settings.youtube} target="_blank" rel="noopener">YouTube</a>}
+              {settings.tiktok && <a href={settings.tiktok} target="_blank" rel="noopener">TikTok</a>}
+              {settings.zalo && <a href={settings.zalo} target="_blank" rel="noopener">Zalo</a>}
+            </div>
+          </div>
+          <div>
+            <h4>Liên hệ</h4>
+            <ul>
+              <li>Hotline / Zalo: <a href={`tel:${settings.hotline}`}>{settings.hotline_display}</a></li>
+              {settings.email && <li>Email: <a href={`mailto:${settings.email}`}>{settings.email}</a></li>}
+              {settings.address && <li>Địa chỉ: {settings.address}</li>}
+            </ul>
+          </div>
+          <div>
+            <h4>Liên kết</h4>
+            <ul>{settings.nav.map((n) => <li><a href={resolveLink(n.link)}>{n.label}</a></li>)}</ul>
+          </div>
+        </div>
+        <div class="footer-note">
+          {settings.footer_note && <p>{settings.footer_note}</p>}
+          © {year} {settings.site_name}. ydaothoidai.com
+        </div>
+      </div>
+    </footer>
+
+    <div class="float-actions">
+      {settings.zalo && <a class="f-zalo" href={settings.zalo} target="_blank" rel="noopener" aria-label="Nhắn Zalo"><b>Zalo</b></a>}
+      {settings.messenger && <a class="f-mess" href={settings.messenger} target="_blank" rel="noopener" aria-label="Nhắn Messenger"><Icon name="chat" /></a>}
+      <a class="f-call" href={`tel:${settings.hotline}`} aria-label={`Gọi ${settings.hotline_display}`}><Icon name="phone" /></a>
+    </div>
+    <button class="to-top" aria-label="Lên đầu trang"><Icon name="up" /></button>
+
+    <script>
+      const header = document.querySelector('.site-header');
+      const toTop = document.querySelector('.to-top');
+      const onScroll = () => {
+        header?.classList.toggle('scrolled', scrollY > 10);
+        toTop?.classList.toggle('show', scrollY > 600);
+      };
+      addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      toTop?.addEventListener('click', () => scrollTo({ top: 0 }));
+
+      const nav = document.querySelector('.main-nav');
+      const toggle = document.querySelector('.nav-toggle');
+      toggle?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(!!open));
+      });
+      nav?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => nav.classList.remove('open')));
+
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -60px 0px' });
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

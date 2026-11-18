@@ -1,0 +1,28 @@
+---
+import Icon from '../Icon.astro';
+import { resolveLink, settings } from '../../lib/site';
+const { s } = Astro.props;
+---
+<div class="custom">
+  <div class="c-text reveal">
+    {s.label && <span class="sec-label">{s.label}</span>}
+    <h2>{s.title}</h2>
+    {s.text && <p class="lead">{s.text}</p>}
+    {s.points?.length > 0 && <ul class="check-list">{s.points.map((p: string) => <li>{p}</li>)}</ul>}
+    <div class="c-btns">
+      {s.button_text && <a class="btn btn-accent" href={resolveLink(s.button_link)}>{s.button_text}<Icon name="arrow" /></a>}
+      <a class="btn btn-light" href={settings.zalo} target="_blank" rel="noopener">Zalo {settings.hotline_display}</a>
+    </div>
+  </div>
+  {s.image && <div class="c-img reveal"><img src={s.image} alt={s.title} loading="lazy" /></div>}
+</div>
+
+<style>
+  .custom { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+  h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); }
+  .lead { font-size: 1.08rem; opacity: .92; }
+  .check-list { margin: 20px 0 28px; }
+  .c-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .c-img img { border-radius: calc(var(--radius) * 1.4); width: 100%; box-shadow: 0 30px 60px rgba(0, 0, 0, .35); border: 6px solid rgba(255, 255, 255, .08); }
+  @media (max-width: 860px) { .custom { grid-template-columns: 1fr; } .c-img { order: -1; } }
+</style>

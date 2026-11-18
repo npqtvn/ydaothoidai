@@ -1,0 +1,51 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts, fmtDate } from '../../lib/data';
+import { settings } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const all = await getPosts();
+  return all.map((p) => ({ params: { slug: p.id }, props: { p } }));
+}
+const { p } = Astro.props;
+const { Content } = await render(p);
+const more = (await getPosts()).filter((x) => x.id !== p.id).slice(0, 3);
+---
+<Base title={p.data.title} description={p.data.excerpt} image={p.data.cover}>
+  <article class="section">
+    <div class="container narrow">
+      <nav class="crumb"><a href="/">Trang chủ</a> / <a href="/bai-viet/">Bài viết</a></nav>
+      <time>{fmtDate(p.data.date)}</time>
+      <h1>{p.data.title}</h1>
+      {p.data.cover && <img class="cover" src={p.data.cover} alt="" />}
+      <div class="prose"><Content /></div>
+      <div class="cta">
+        <strong>Cần tư vấn chọn trà phù hợp?</strong>
+        <a class="btn btn-accent" href="/#dat-tra">Đặt trà / Nhận tư vấn</a>
+        <a class="btn btn-zalo" href={settings.zalo} target="_blank" rel="noopener">Zalo {settings.hotline_display}</a>
+      </div>
+    </div>
+  </article>
+  {more.length > 0 && (
+    <section class="section bg-alt">
+      <div class="container">
+        <div class="sec-head"><span class="sec-label">Đọc thêm</span><h2>Bài viết khác</h2></div>
+        <div class="grid">{more.map((m) => <PostCard p={m} />)}</div>
+      </div>
+    </section>
+  )}
+</Base>
+<style>
+  .narrow { max-width: 820px; }
+  .crumb { font-size: .85rem; margin-bottom: 10px; }
+  .crumb a { color: inherit; opacity: .7; text-decoration: none; }
+  time { color: var(--accent); font-weight: 600; font-size: .9rem; }
+  h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-top: .2em; }
+  .cover { border-radius: calc(var(--radius) * 1.2); margin: 20px 0 30px; width: 100%; }
+  .cta { margin-top: 40px; padding: 24px; border-radius: var(--radius); background: var(--bg-alt); display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .cta strong { flex: 1 1 100%; color: var(--primary); font-size: 1.1rem; }
+  .btn-zalo { background: #0068ff; color: #fff; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+</style>

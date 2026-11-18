@@ -1,0 +1,34 @@
+---
+import OrderForm from '../OrderForm.astro';
+import Icon from '../Icon.astro';
+import { settings } from '../../lib/site';
+const { s } = Astro.props;
+---
+<div class="contact">
+  <div class="c-info reveal">
+    {s.label && <span class="sec-label">{s.label}</span>}
+    <h2>{s.title}</h2>
+    {s.text && <p>{s.text}</p>}
+    <a class="hot" href={`tel:${settings.hotline}`}><Icon name="phone" /><span><small>Hotline / Zalo</small>{settings.hotline_display}</span></a>
+    <p class="owner">{settings.owner}</p>
+    {settings.address && <p>📍 {settings.address}</p>}
+    {settings.map_embed && <div class="map" set:html={settings.map_embed} />}
+    {!settings.map_embed && s.image && <img class="c-img" src={s.image} alt="" loading="lazy" />}
+  </div>
+  <div class="reveal"><OrderForm /></div>
+</div>
+
+<style>
+  .contact { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 60px); align-items: start; }
+  h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
+  .hot {
+    display: inline-flex; align-items: center; gap: 14px; margin: 10px 0 6px; text-decoration: none; color: #fff;
+    font-family: var(--font-heading); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700;
+  }
+  .hot :global(svg) { width: 54px; height: 54px; padding: 13px; border-radius: 50%; background: var(--accent); }
+  .hot small { display: block; font-family: var(--font-body); font-size: .8rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+  .owner { opacity: .85; }
+  .c-img { margin-top: 20px; border-radius: var(--radius); max-height: 380px; width: 100%; object-fit: cover; object-position: top; }
+  .map :global(iframe) { width: 100%; height: 300px; border: 0; border-radius: var(--radius); margin-top: 16px; }
+  @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+</style>

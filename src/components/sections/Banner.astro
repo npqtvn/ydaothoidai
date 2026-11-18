@@ -1,0 +1,14 @@
+---
+import { resolveLink } from '../../lib/site';
+const { s } = Astro.props;
+const href = resolveLink(s.link);
+---
+{s.image && (
+  href
+    ? <a class="banner reveal" href={href}><img src={s.image} alt={s.alt || ''} loading="lazy" /></a>
+    : <div class="banner reveal"><img src={s.image} alt={s.alt || ''} loading="lazy" /></div>
+)}
+<style>
+  .banner { display: block; border-radius: calc(var(--radius) * 1.2); overflow: hidden; box-shadow: 0 18px 40px rgba(47, 74, 43, .15); }
+  .banner img { width: 100%; }
+</style>

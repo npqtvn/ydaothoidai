@@ -1,0 +1,447 @@
+# Cấu hình trang quản trị (Sveltia CMS) cho ydaothoidai.com
+# Kho GitHub chứa website: https://github.com/npqtvn/ydaothoidai
+
+backend:
+  name: github
+  repo: npqtvn/ydaothoidai
+  branch: main
+  commit_messages:
+    create: "Thêm {{collection}} “{{slug}}”"
+    update: "Cập nhật {{collection}} “{{slug}}”"
+    delete: "Xóa {{collection}} “{{slug}}”"
+    uploadMedia: "Tải ảnh “{{path}}”"
+    deleteMedia: "Xóa ảnh “{{path}}”"
+
+site_url: https://ydaothoidai.com
+display_url: https://ydaothoidai.com
+logo_url: /uploads/logo.png
+
+media_folder: public/uploads
+public_folder: /uploads
+
+# Ảnh tải lên sẽ tự chuyển sang WebP và thu nhỏ còn tối đa 1600px để web tải nhanh
+media_libraries:
+  default:
+    config:
+      max_file_size: 15000000
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 1600
+          height: 1600
+
+# Tên file / đường dẫn tự bỏ dấu tiếng Việt: "Trà Giải Cảm" -> tra-giai-cam
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+# ---------- Các trường dùng chung cho khối trang chủ ----------
+_shared:
+  enabled: &f_enabled { name: enabled, label: "Hiển thị khối này", widget: boolean, default: true }
+  anchor: &f_anchor { name: anchor, label: "Mã neo (để menu cuộn tới, vd: san-pham)", widget: string, required: false }
+  bg: &f_bg
+    name: bg
+    label: "Nền"
+    widget: select
+    default: default
+    options:
+      - { label: "Màu nền chính", value: default }
+      - { label: "Màu nền phụ", value: alt }
+      - { label: "Màu chủ đạo (tối)", value: dark }
+  label: &f_label { name: label, label: "Nhãn nhỏ phía trên tiêu đề", widget: string, required: false }
+  title: &f_title { name: title, label: "Tiêu đề", widget: string, required: false }
+  intro: &f_intro { name: intro, label: "Đoạn giới thiệu", widget: text, required: false }
+  image: &f_image { name: image, label: "Ảnh", widget: image, required: false }
+
+collections:
+  # ================= CÀI ĐẶT & TRANG CHỦ =================
+  - name: cai_dat
+    label: "⚙️ Cài đặt & Trang chủ"
+    files:
+      - name: home
+        label: "🏠 Trang chủ (các khối, kéo thả để đổi thứ tự)"
+        file: src/data/home.json
+        format: json
+        fields:
+          - name: sections
+            label: "Các khối"
+            label_singular: "khối"
+            widget: list
+            summary: "{{fields.title}}"
+            types:
+              - name: hero
+                label: "Ảnh bìa đầu trang (Hero)"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - name: layout
+                    label: "Kiểu bố cục"
+                    widget: select
+                    default: split
+                    options:
+                      - { label: "Chữ bên trái, ảnh sản phẩm bên phải", value: split }
+                      - { label: "Ảnh nền toàn màn hình, chữ trắng", value: fullbg }
+                  - *f_label
+                  - { name: title, label: "Tiêu đề lớn", widget: string }
+                  - { name: script_title, label: "Dòng chữ viết tay", widget: string, required: false }
+                  - { name: subtitle, label: "Mô tả ngắn", widget: text, required: false }
+                  - { name: image, label: "Ảnh sản phẩm (kiểu chữ trái - ảnh phải)", widget: image, required: false }
+                  - { name: bg_image, label: "Ảnh nền (kiểu toàn màn hình)", widget: image, required: false }
+                  - { name: button_text, label: "Nút chính - chữ", widget: string, required: false }
+                  - { name: button_link, label: "Nút chính - link (#dat-tra, zalo, tel hoặc https://...)", widget: string, required: false }
+                  - { name: button2_text, label: "Nút phụ - chữ", widget: string, required: false }
+                  - { name: button2_link, label: "Nút phụ - link", widget: string, required: false }
+                  - { name: badges, label: "Nhãn nhỏ", widget: list, required: false }
+
+              - name: features
+                label: "Điểm nổi bật 01 / 02 / 03"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - name: style
+                    label: "Kiểu số thứ tự"
+                    widget: select
+                    default: numbered
+                    options:
+                      - { label: "Số lớn viền vàng (01, 02…)", value: numbered }
+                      - { label: "Số trong vòng tròn", value: cards }
+                  - *f_label
+                  - *f_title
+                  - *f_intro
+                  - { name: image, label: "Ảnh minh họa (để trống = các ý xếp thành cột)", widget: image, required: false }
+                  - name: items
+                    label: "Các ý"
+                    label_singular: "ý"
+                    widget: list
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { name: title, label: "Tiêu đề", widget: string }
+                      - { name: text, label: "Mô tả", widget: text, required: false }
+                      - { name: points, label: "Các dòng có dấu ✓", widget: list, required: false }
+
+              - name: products
+                label: "Danh sách sản phẩm"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - *f_intro
+                  - { name: columns, label: "Số cột trên máy tính", widget: select, options: ["2", "3", "4"], default: "3" }
+
+              - name: custom
+                label: "Trà phối riêng theo thể trạng"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - { name: text, label: "Mô tả", widget: text, required: false }
+                  - { name: points, label: "Các dòng có dấu ✓", widget: list, required: false }
+                  - *f_image
+                  - { name: button_text, label: "Nút - chữ", widget: string, required: false }
+                  - { name: button_link, label: "Nút - link", widget: string, required: false }
+
+              - name: about
+                label: "Giới thiệu người bào chế / thương hiệu"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - { name: text, label: "Nội dung", widget: markdown, required: false }
+                  - *f_image
+                  - name: stats
+                    label: "Con số nổi bật"
+                    widget: list
+                    required: false
+                    summary: "{{fields.number}} {{fields.unit}}"
+                    fields:
+                      - { name: number, label: "Con số", widget: string }
+                      - { name: unit, label: "Đơn vị", widget: string, required: false }
+                      - { name: text, label: "Chú thích", widget: string, required: false }
+
+              - name: steps
+                label: "Các bước (Hướng dẫn sử dụng)"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - *f_intro
+                  - *f_image
+                  - name: items
+                    label: "Các bước"
+                    label_singular: "bước"
+                    widget: list
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { name: title, label: "Tên bước", widget: string }
+                      - { name: text, label: "Mô tả", widget: text }
+
+              - name: video
+                label: "Video"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - *f_intro
+                  - name: items
+                    label: "Video"
+                    label_singular: "video"
+                    widget: list
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { name: title, label: "Tiêu đề", widget: string, required: false }
+                      - { name: url, label: "Link (YouTube sẽ phát ngay trên web; TikTok/Facebook sẽ mở tab mới)", widget: string }
+                      - { name: cover, label: "Ảnh bìa (YouTube tự lấy nếu để trống)", widget: image, required: false }
+
+              - name: gallery
+                label: "Thư viện ảnh"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - *f_intro
+                  - name: images
+                    label: "Ảnh"
+                    label_singular: "ảnh"
+                    widget: list
+                    summary: "{{fields.caption}}"
+                    fields:
+                      - { name: image, label: "Ảnh", widget: image }
+                      - { name: caption, label: "Chú thích", widget: string, required: false }
+
+              - name: testimonials
+                label: "Cảm nhận khách hàng"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - name: items
+                    label: "Cảm nhận"
+                    widget: list
+                    summary: "{{fields.name}}"
+                    fields:
+                      - { name: name, label: "Tên", widget: string }
+                      - { name: info, label: "Thông tin thêm (tuổi, nơi ở…)", widget: string, required: false }
+                      - { name: text, label: "Nội dung", widget: text }
+                      - { name: avatar, label: "Ảnh đại diện", widget: image, required: false }
+
+              - name: faq
+                label: "Hỏi đáp"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - name: items
+                    label: "Câu hỏi"
+                    widget: list
+                    summary: "{{fields.q}}"
+                    fields:
+                      - { name: q, label: "Câu hỏi", widget: string }
+                      - { name: a, label: "Trả lời", widget: markdown }
+
+              - name: posts
+                label: "Bài viết mới"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - { name: count, label: "Số bài hiển thị", widget: number, value_type: int, default: 3 }
+
+              - name: contact
+                label: "Liên hệ & Form đặt trà"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - { name: text, label: "Mô tả", widget: text, required: false }
+                  - { name: image, label: "Ảnh (hiện khi chưa có bản đồ)", widget: image, required: false }
+
+              - name: banner
+                label: "Ảnh banner"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - { name: image, label: "Ảnh", widget: image }
+                  - { name: alt, label: "Mô tả ảnh", widget: string, required: false }
+                  - { name: link, label: "Link khi bấm", widget: string, required: false }
+
+              - name: richtext
+                label: "Đoạn văn tự do"
+                widget: object
+                fields:
+                  - *f_enabled
+                  - *f_anchor
+                  - *f_bg
+                  - *f_label
+                  - *f_title
+                  - { name: body, label: "Nội dung", widget: markdown }
+
+      - name: settings
+        label: "🎨 Giao diện, liên hệ & menu"
+        file: src/data/settings.json
+        format: json
+        fields:
+          - name: theme
+            label: "Màu sắc & font chữ"
+            widget: object
+            collapsed: false
+            fields:
+              - { name: primary, label: "Màu chủ đạo (xanh rêu)", widget: color }
+              - { name: primary_light, label: "Màu chủ đạo nhạt", widget: color }
+              - { name: accent, label: "Màu nhấn (nút, số)", widget: color }
+              - { name: bg, label: "Màu nền chính", widget: color }
+              - { name: bg_alt, label: "Màu nền phụ", widget: color }
+              - { name: text, label: "Màu chữ", widget: color }
+              -
+                name: heading_font
+                label: "Font tiêu đề"
+                widget: select
+                options: ["Playfair Display", "Lora", "Merriweather", "Noto Serif", "EB Garamond", "Cormorant Garamond", "Philosopher", "Be Vietnam Pro", "Montserrat", "Inter", "Roboto", "Nunito", "Quicksand"]
+              - name: body_font
+                label: "Font nội dung"
+                widget: select
+                options: ["Be Vietnam Pro", "Inter", "Roboto", "Montserrat", "Nunito", "Quicksand", "Lora", "Noto Serif", "Merriweather"]
+              - name: script_font
+                label: "Font chữ viết tay"
+                widget: select
+                options: ["Dancing Script", "Charm", "Pacifico", "Great Vibes", "Playfair Display", "Lora"]
+              - { name: font_scale, label: "Cỡ chữ (%)", widget: number, value_type: int, min: 85, max: 125, default: 100 }
+              - { name: radius, label: "Bo góc (px)", widget: number, value_type: int, min: 0, max: 40, default: 18 }
+              - { name: container, label: "Độ rộng nội dung tối đa (px)", widget: number, value_type: int, min: 960, max: 1600, default: 1180 }
+              - name: header_style
+                label: "Kiểu thanh menu"
+                widget: select
+                options:
+                  - { label: "Sáng", value: light }
+                  - { label: "Tối (màu chủ đạo)", value: dark }
+          - { name: site_name, label: "Tên thương hiệu", widget: string }
+          - { name: tagline, label: "Khẩu hiệu", widget: string }
+          - { name: logo, label: "Logo", widget: image }
+          - { name: seo_title, label: "Tiêu đề trang chủ trên Google", widget: string }
+          - { name: seo_description, label: "Mô tả trên Google", widget: text }
+          - { name: share_image, label: "Ảnh khi chia sẻ link lên Facebook/Zalo", widget: image, required: false }
+          - { name: hotline, label: "Hotline (chỉ số, vd 0979098191)", widget: string }
+          - { name: hotline_display, label: "Hotline hiển thị (vd 0979 098 191)", widget: string }
+          - { name: zalo, label: "Link Zalo", widget: string }
+          - { name: messenger, label: "Link Messenger (m.me/...)", widget: string, required: false }
+          - { name: facebook, label: "Facebook", widget: string, required: false }
+          - { name: youtube, label: "YouTube", widget: string, required: false }
+          - { name: tiktok, label: "TikTok", widget: string, required: false }
+          - { name: email, label: "Email", widget: string, required: false }
+          - { name: address, label: "Địa chỉ", widget: string, required: false }
+          - { name: map_embed, label: "Mã nhúng Google Maps (<iframe…>)", widget: text, required: false }
+          - { name: owner, label: "Người phụ trách", widget: string, required: false }
+          - { name: form_endpoint, label: "Link nhận đơn (Google Apps Script). Để trống = gửi đơn qua Zalo", widget: string, required: false }
+          - { name: footer_note, label: "Ghi chú cuối trang", widget: text, required: false }
+          - name: nav
+            label: "Menu"
+            widget: list
+            summary: "{{fields.label}} → {{fields.link}}"
+            fields:
+              - { name: label, label: "Chữ", widget: string }
+              - { name: link, label: "Link (/#san-pham, /bai-viet/ …)", widget: string }
+          - name: nav_cta
+            label: "Nút nổi bật trên menu"
+            widget: object
+            fields:
+              - { name: label, label: "Chữ", widget: string }
+              - { name: link, label: "Link", widget: string }
+
+  # ================= SẢN PHẨM =================
+  - name: products
+    label: "🍵 Sản phẩm"
+    label_singular: "sản phẩm"
+    folder: src/content/products
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{title}}"
+    identifier_field: title
+    summary: "{{order}}. {{title}}"
+    sortable_fields: [order, title]
+    thumbnail: image
+    fields:
+      - { name: title, label: "Tên sản phẩm", widget: string }
+      - { name: order, label: "Thứ tự hiển thị", widget: number, value_type: int, default: 10 }
+      - { name: hidden, label: "Tạm ẩn", widget: boolean, default: false }
+      - { name: badge, label: "Nhãn (vd: Bán chạy, Mới)", widget: string, required: false }
+      - { name: color, label: "Màu riêng của dòng trà", widget: color, required: false }
+      - { name: short, label: "Mô tả ngắn (hiện trên thẻ sản phẩm)", widget: text }
+      - { name: tagline, label: "Câu chủ đề (chữ viết tay)", widget: string, required: false }
+      - { name: image, label: "Ảnh chính", widget: image }
+      - { name: gallery, label: "Ảnh thêm", widget: image, multiple: true, required: false }
+      - { name: price, label: "Giá (vd: 150.000đ / hộp 20 túi). Để trống = Liên hệ", widget: string, required: false }
+      - { name: price_note, label: "Ghi chú giá", widget: string, required: false }
+      - name: effects
+        label: "Tác dụng chính"
+        widget: list
+        summary: "{{fields.title}}"
+        fields:
+          - { name: title, label: "Tác dụng", widget: string }
+          - { name: text, label: "Mô tả", widget: text, required: false }
+      - { name: suitable, label: "Phù hợp với", widget: list }
+      - name: ingredients
+        label: "Các vị thuốc"
+        widget: list
+        summary: "{{fields.name}}"
+        fields:
+          - { name: name, label: "Tên vị", widget: string }
+          - { name: text, label: "Công dụng", widget: string, required: false }
+      - { name: body, label: "Mô tả chi tiết", widget: markdown, required: false }
+
+  # ================= BÀI VIẾT =================
+  - name: posts
+    label: "📝 Bài viết"
+    label_singular: "bài viết"
+    folder: src/content/posts
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{title}}"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: [date, title]
+    thumbnail: cover
+    fields:
+      - { name: title, label: "Tiêu đề", widget: string }
+      - { name: date, label: "Ngày đăng", widget: datetime, time_format: false, date_format: "DD/MM/YYYY", format: "YYYY-MM-DD" }
+      - { name: draft, label: "Bản nháp (chưa đăng)", widget: boolean, default: false }
+      - { name: cover, label: "Ảnh bìa", widget: image, required: false }
+      - { name: excerpt, label: "Tóm tắt", widget: text, required: false }
+      - { name: body, label: "Nội dung", widget: markdown }

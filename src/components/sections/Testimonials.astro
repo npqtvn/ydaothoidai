@@ -1,0 +1,29 @@
+---
+import SectionHead from '../SectionHead.astro';
+const { s } = Astro.props;
+---
+<SectionHead label={s.label} title={s.title} intro={s.intro} />
+<div class="tgrid">
+  {(s.items ?? []).map((t: any) => (
+    <blockquote class="titem reveal">
+      <span class="quote">“</span>
+      <p>{t.text}</p>
+      <footer>
+        {t.avatar ? <img src={t.avatar} alt="" loading="lazy" /> : <span class="ava">{t.name?.[0] ?? '•'}</span>}
+        <div><strong>{t.name}</strong>{t.info && <small>{t.info}</small>}</div>
+      </footer>
+    </blockquote>
+  ))}
+</div>
+
+<style>
+  .tgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .titem { margin: 0; padding: 30px 26px 24px; background: #fffdf7; border-radius: var(--radius); position: relative; box-shadow: 0 10px 30px rgba(47, 74, 43, .07); }
+  .quote { position: absolute; top: -6px; left: 20px; font-family: var(--font-heading); font-size: 5rem; line-height: 1; color: var(--accent); opacity: .5; }
+  p { font-style: italic; position: relative; }
+  footer { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+  img, .ava { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; }
+  .ava { display: grid; place-items: center; background: var(--primary); color: #fff; font-weight: 700; }
+  strong { display: block; color: var(--primary); }
+  small { font-size: .8rem; opacity: .7; }
+</style>

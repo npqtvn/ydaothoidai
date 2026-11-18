@@ -1,0 +1,35 @@
+---
+// Vẽ các khối trang chủ theo đúng thứ tự trong trang quản trị (src/data/home.json)
+import Hero from './sections/Hero.astro';
+import Features from './sections/Features.astro';
+import Products from './sections/Products.astro';
+import Custom from './sections/Custom.astro';
+import About from './sections/About.astro';
+import Steps from './sections/Steps.astro';
+import Video from './sections/Video.astro';
+import Gallery from './sections/Gallery.astro';
+import Testimonials from './sections/Testimonials.astro';
+import Faq from './sections/Faq.astro';
+import Posts from './sections/Posts.astro';
+import Contact from './sections/Contact.astro';
+import RichText from './sections/RichText.astro';
+import Banner from './sections/Banner.astro';
+
+const MAP: Record<string, any> = {
+  features: Features, products: Products, custom: Custom, about: About, steps: Steps, video: Video,
+  gallery: Gallery, testimonials: Testimonials, faq: Faq, posts: Posts, contact: Contact, richtext: RichText, banner: Banner,
+};
+const { sections = [] } = Astro.props as { sections: any[] };
+const list = sections.filter((s) => s && s.enabled !== false);
+---
+{list.map((s) => {
+  if (s.type === 'hero') return <Hero s={s} />;
+  const C = MAP[s.type];
+  if (!C) return null;
+  const bg = s.type === 'custom' || s.type === 'contact' ? (s.bg || 'dark') : (s.bg || 'default');
+  return (
+    <section class={`section bg-${bg}`} id={s.anchor || undefined}>
+      <div class="container"><C s={s} /></div>
+    </section>
+  );
+})}

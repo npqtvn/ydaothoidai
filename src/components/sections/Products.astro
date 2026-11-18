@@ -1,0 +1,18 @@
+---
+import SectionHead from '../SectionHead.astro';
+import ProductCard from '../ProductCard.astro';
+import { getProducts } from '../../lib/data';
+const { s } = Astro.props;
+const products = await getProducts();
+const cols = Number(s.columns) || 3;
+---
+<SectionHead label={s.label} title={s.title} intro={s.intro} />
+<div class="pgrid" style={`--cols:${cols}`}>
+  {products.map((p) => <ProductCard p={p} />)}
+</div>
+
+<style>
+  .pgrid { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 26px; }
+  @media (max-width: 980px) { .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .pgrid { grid-template-columns: 1fr; } }
+</style>

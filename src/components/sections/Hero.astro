@@ -1,0 +1,79 @@
+---
+import Icon from '../Icon.astro';
+import { resolveLink, settings } from '../../lib/site';
+const { s } = Astro.props;
+const full = s.layout === 'fullbg';
+const btn2 = resolveLink(s.button2_link);
+---
+<section class={`hero ${full ? 'hero-full' : 'hero-split'}`} style={full && s.bg_image ? `--hero-bg:url('${s.bg_image}')` : ''}>
+  <div class="container hero-grid">
+    <div class="hero-text">
+      {s.label && <span class="hero-label"><Icon name="leaf" />{s.label}</span>}
+      <h1>{s.title}</h1>
+      {s.script_title && <p class="hero-script script">{s.script_title}</p>}
+      {s.subtitle && <p class="hero-sub">{s.subtitle}</p>}
+      <div class="hero-btns">
+        {s.button_text && <a class="btn btn-accent" href={resolveLink(s.button_link)}>{s.button_text}<Icon name="arrow" /></a>}
+        {s.button2_text && <a class={`btn ${full ? 'btn-light' : 'btn-outline'}`} href={btn2} target={btn2.startsWith('http') ? '_blank' : undefined} rel="noopener">{s.button2_text}</a>}
+      </div>
+      {s.badges?.length > 0 && <ul class="hero-badges">{s.badges.map((b: string) => <li>{b}</li>)}</ul>}
+      <p class="hero-hotline">Hotline / Zalo: <a href={`tel:${settings.hotline}`}>{settings.hotline_display}</a></p>
+    </div>
+    {!full && s.image && (
+      <div class="hero-media">
+        <div class="hero-circle"></div>
+        <img src={s.image} alt={s.title} loading="eager" fetchpriority="high" />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; overflow: hidden; }
+  .hero-split {
+    padding: clamp(40px, 6vw, 80px) 0 clamp(56px, 7vw, 96px);
+    background:
+      radial-gradient(circle at 85% 20%, color-mix(in srgb, var(--primary-light) 16%, transparent), transparent 55%),
+      radial-gradient(circle at 10% 90%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 50%),
+      var(--bg);
+  }
+  .hero-full {
+    min-height: min(88vh, 820px); display: flex; align-items: center; padding: 80px 0; color: #fff;
+    background: linear-gradient(90deg, rgba(20, 32, 18, .88), rgba(20, 32, 18, .45)), var(--hero-bg) center/cover;
+  }
+  .hero-full h1 { color: #fff; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .hero-full .hero-grid { grid-template-columns: minmax(0, 720px); }
+  .hero-label {
+    display: inline-flex; align-items: center; gap: 8px; font-size: .78rem; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+  }
+  .hero-label :global(svg) { width: 18px; height: 18px; }
+  h1 { font-size: clamp(2.6rem, 6.4vw, 4.8rem); margin-bottom: .1em; letter-spacing: -.01em; }
+  .hero-script { font-size: clamp(1.5rem, 3.2vw, 2.3rem); color: var(--accent); margin: 0 0 .6em; line-height: 1.25; }
+  .hero-sub { font-size: 1.08rem; max-width: 560px; opacity: .9; }
+  .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin: 26px 0 22px; }
+  .hero-badges { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .hero-badges li {
+    padding: 6px 14px; border-radius: 999px; font-size: .82rem; font-weight: 500;
+    background: color-mix(in srgb, var(--primary) 8%, transparent); color: var(--primary);
+  }
+  .hero-full .hero-badges li { background: rgba(255, 255, 255, .14); color: #fff; }
+  .hero-hotline { margin-top: 20px; font-size: .92rem; opacity: .85; }
+  .hero-hotline a { font-weight: 700; color: inherit; }
+  .hero-media { position: relative; display: grid; place-items: center; }
+  .hero-circle {
+    position: absolute; width: 92%; aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%);
+  }
+  .hero-media img {
+    position: relative; width: min(100%, 440px); border-radius: calc(var(--radius) * 1.6);
+    box-shadow: 0 30px 60px rgba(47, 74, 43, .25); transform: rotate(2deg);
+  }
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+    .hero-sub { margin-inline: auto; }
+    .hero-btns, .hero-badges { justify-content: center; }
+    .hero-media img { width: min(78%, 360px); }
+  }
+</style>

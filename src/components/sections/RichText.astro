@@ -1,0 +1,8 @@
+---
+import SectionHead from '../SectionHead.astro';
+import { md } from '../../lib/site';
+const { s } = Astro.props;
+---
+<SectionHead label={s.label} title={s.title} />
+<div class="prose rt reveal" set:html={md(s.body)} />
+<style>.rt { max-width: 820px; margin: 0 auto; }</style>

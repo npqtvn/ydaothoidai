@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts } from '../../lib/data';
+const posts = await getPosts();
+---
+<Base title="Bài viết" description="Kiến thức Y học cổ truyền và Trà Thảo Mộc từ Y Đạo Thời Đại.">
+  <section class="section">
+    <div class="container">
+      <div class="sec-head"><span class="sec-label">Kiến thức</span><h1>Bài viết</h1></div>
+      <div class="grid">{posts.map((p) => <PostCard p={p} />)}</div>
+      {posts.length === 0 && <p style="text-align:center">Chưa có bài viết.</p>}
+    </div>
+  </section>
+</Base>
+<style>
+  h1 { font-size: clamp(2rem, 4vw, 2.8rem); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+</style>

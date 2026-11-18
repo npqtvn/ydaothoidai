@@ -1,0 +1,98 @@
+---
+import Icon from './Icon.astro';
+import { settings } from '../lib/site';
+import { getProducts } from '../lib/data';
+const { selected = '', title = 'Thông tin đặt trà' } = Astro.props as { selected?: string; title?: string };
+const products = await getProducts();
+---
+<form class="order card" data-endpoint={settings.form_endpoint} data-zalo={settings.zalo} data-phone={settings.hotline_display}>
+  <h3>{title}</h3>
+  <div class="row2">
+    <label>Họ tên *<input name="ho_ten" required autocomplete="name" /></label>
+    <label>Số điện thoại *<input name="so_dien_thoai" required type="tel" inputmode="tel" pattern="[0-9 +.]{9,15}" autocomplete="tel" /></label>
+  </div>
+  <div class="row2">
+    <label>Loại trà
+      <select name="loai_tra">
+        {products.map((p) => <option selected={p.data.title === selected}>{p.data.title}</option>)}
+        <option selected={selected === 'custom'}>Trà phối riêng theo thể trạng</option>
+        <option>Chưa biết — cần tư vấn</option>
+      </select>
+    </label>
+    <label>Số lượng<input name="so_luong" type="number" min="1" value="1" /></label>
+  </div>
+  <label>Địa chỉ nhận hàng<input name="dia_chi" autocomplete="street-address" /></label>
+  <label>Ghi chú / thể trạng của bạn<textarea name="ghi_chu" rows="3" placeholder="Ví dụ: hay mệt mỏi, khó ngủ, tay chân lạnh…"></textarea></label>
+  <div class="btns">
+    <button class="btn btn-accent" type="submit"><Icon name="send" />Gửi đơn đặt trà</button>
+    <button class="btn btn-zalo" type="button" data-zalo-send>Gửi qua Zalo</button>
+  </div>
+  <p class="msg" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.order').forEach((form) => {
+    const msg = form.querySelector<HTMLElement>('.msg')!;
+    const summary = () => {
+      const f = new FormData(form);
+      return [
+        'ĐẶT TRÀ — Y Đạo Thời Đại',
+        `Họ tên: ${f.get('ho_ten') || ''}`,
+        `SĐT: ${f.get('so_dien_thoai') || ''}`,
+        `Loại trà: ${f.get('loai_tra')} × ${f.get('so_luong')}`,
+        `Địa chỉ: ${f.get('dia_chi') || ''}`,
+        `Ghi chú: ${f.get('ghi_chu') || ''}`,
+      ].join('\n');
+    };
+    const viaZalo = async () => {
+      try { await navigator.clipboard.writeText(summary()); } catch {}
+      msg.className = 'msg ok';
+      msg.textContent = `Đã sao chép nội dung đơn. Zalo đang mở — bạn chỉ cần dán (giữ ngón tay hoặc Ctrl+V) và gửi cho ${form.dataset.phone}.`;
+      window.open(form.dataset.zalo, '_blank');
+    };
+    form.querySelector('[data-zalo-send]')?.addEventListener('click', () => {
+      if (form.reportValidity()) viaZalo();
+    });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) return viaZalo();
+      const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+      btn.disabled = true;
+      msg.className = 'msg';
+      msg.textContent = 'Đang gửi…';
+      try {
+        const data = new FormData(form);
+        data.append('thoi_gian', new Date().toLocaleString('vi-VN'));
+        data.append('trang', location.pathname);
+        await fetch(endpoint, { method: 'POST', body: new URLSearchParams(data as any), mode: 'no-cors' });
+        form.reset();
+        msg.className = 'msg ok';
+        msg.textContent = 'Cảm ơn bạn! Chúng tôi sẽ gọi lại xác nhận đơn trong thời gian sớm nhất.';
+      } catch {
+        msg.className = 'msg err';
+        msg.textContent = 'Chưa gửi được. Bạn vui lòng bấm "Gửi qua Zalo" hoặc gọi hotline.';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>
+
+<style>
+  .order { padding: clamp(22px, 4vw, 34px); color: var(--text); display: grid; gap: 14px; }
+  h3 { font-size: 1.4rem; margin: 0 0 4px; color: var(--primary); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  label { display: grid; gap: 6px; font-size: .88rem; font-weight: 600; color: var(--primary); }
+  input, select, textarea {
+    font: inherit; font-weight: 400; color: var(--text); padding: 12px 14px; border-radius: 10px; width: 100%;
+    border: 1.5px solid color-mix(in srgb, var(--primary) 18%, transparent); background: #fff;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  .btn-zalo { background: #0068ff; color: #fff; }
+  .msg { margin: 0; font-size: .92rem; }
+  .msg.ok { color: #2e7d32; font-weight: 600; }
+  .msg.err { color: #c62828; font-weight: 600; }
+  @media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } .btns .btn { flex: 1; } }
+</style>

@@ -1,0 +1,59 @@
+---
+import SectionHead from '../SectionHead.astro';
+import Icon from '../Icon.astro';
+import { youtubeId } from '../../lib/site';
+const { s } = Astro.props;
+const items = (s.items ?? []).map((it: any) => {
+  const id = youtubeId(it.url);
+  return { ...it, id, cover: it.cover || (id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : '') };
+});
+---
+<SectionHead label={s.label} title={s.title} intro={s.intro} />
+<div class="vgrid">
+  {items.map((it: any) => (
+    <figure class="vitem reveal">
+      {it.id ? (
+        <button class="vthumb" data-yt={it.id} aria-label={`Phát video: ${it.title}`}>
+          {it.cover && <img src={it.cover} alt="" loading="lazy" />}
+          <span class="vplay"><Icon name="play" /></span>
+        </button>
+      ) : (
+        <a class="vthumb" href={it.url} target="_blank" rel="noopener">
+          {it.cover && <img src={it.cover} alt="" loading="lazy" />}
+          <span class="vplay"><Icon name="play" /></span>
+        </a>
+      )}
+      {it.title && <figcaption>{it.title}</figcaption>}
+    </figure>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('button.vthumb[data-yt]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = `https://www.youtube-nocookie.com/embed/${b.dataset.yt}?autoplay=1&rel=0`;
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      f.title = 'Video';
+      b.replaceWith(f);
+    })
+  );
+</script>
+
+<style>
+  .vgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .vitem { margin: 0; }
+  .vthumb, .vitem :global(iframe) {
+    display: block; position: relative; width: 100%; aspect-ratio: 16/9; border: 0; padding: 0; cursor: pointer;
+    border-radius: var(--radius); overflow: hidden; background: var(--primary);
+  }
+  .vthumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s, opacity .3s; opacity: .85; }
+  .vthumb:hover img { transform: scale(1.04); opacity: 1; }
+  .vplay {
+    position: absolute; inset: 0; margin: auto; width: 72px; height: 72px; border-radius: 50%;
+    background: var(--accent); color: #fff; display: grid; place-items: center; box-shadow: 0 0 0 10px rgba(255, 255, 255, .25);
+  }
+  .vplay :global(svg) { width: 30px; height: 30px; margin-left: 4px; }
+  figcaption { margin-top: 10px; font-weight: 600; color: var(--primary); }
+</style>

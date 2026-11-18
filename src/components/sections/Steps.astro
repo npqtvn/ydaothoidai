@@ -1,0 +1,32 @@
+---
+import SectionHead from '../SectionHead.astro';
+const { s } = Astro.props;
+---
+<SectionHead label={s.label} title={s.title} intro={s.intro} />
+<div class={`steps ${s.image ? 'with-img' : ''}`}>
+  <ol class="step-list">
+    {(s.items ?? []).map((it: any, i: number) => (
+      <li class="step reveal">
+        <span class="step-n">{i + 1}</span>
+        <div><h3>{it.title}</h3><p>{it.text}</p></div>
+      </li>
+    ))}
+  </ol>
+  {s.image && <div class="step-img reveal"><img src={s.image} alt={s.title} loading="lazy" /></div>}
+</div>
+
+<style>
+  .steps.with-img { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items: center; }
+  .step-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; position: relative; }
+  .steps:not(.with-img) .step-list { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .step { display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding: 18px 20px; background: #fffdf7; border-radius: var(--radius); border: 1px solid color-mix(in srgb, var(--primary) 10%, transparent); }
+  .step-n {
+    width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; color: #fff;
+    background: var(--primary); font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700;
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--primary) 14%, transparent);
+  }
+  h3 { font-size: 1.15rem; margin: .2em 0 .25em; }
+  p { margin: 0; font-size: .95rem; }
+  .step-img img { border-radius: calc(var(--radius) * 1.2); box-shadow: 0 20px 44px rgba(47, 74, 43, .16); }
+  @media (max-width: 860px) { .steps.with-img { grid-template-columns: 1fr; } }
+</style>

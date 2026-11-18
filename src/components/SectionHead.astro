@@ -1,0 +1,11 @@
+---
+const { label, title, intro } = Astro.props as { label?: string; title?: string; intro?: string };
+---
+{(label || title || intro) && (
+  <div class="sec-head reveal">
+    {label && <span class="sec-label">{label}</span>}
+    {title && <h2>{title}</h2>}
+    <div class="leaf-divider"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21c0-6 3-10 9-12-1 6-4 10-9 12zm0 0C12 15 9 11 3 9c1 6 4 10 9 12z"/></svg></div>
+    {intro && <p>{intro}</p>}
+  </div>
+)}

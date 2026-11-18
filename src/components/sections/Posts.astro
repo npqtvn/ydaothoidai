@@ -1,0 +1,19 @@
+---
+import SectionHead from '../SectionHead.astro';
+import PostCard from '../PostCard.astro';
+import { getPosts } from '../../lib/data';
+const { s } = Astro.props;
+const posts = (await getPosts()).slice(0, Number(s.count) || 3);
+---
+{posts.length > 0 && (
+  <>
+    <SectionHead label={s.label} title={s.title} intro={s.intro} />
+    <div class="pgrid">{posts.map((p) => <PostCard p={p} />)}</div>
+    <p class="more"><a class="btn btn-outline" href="/bai-viet/">Xem tất cả bài viết</a></p>
+  </>
+)}
+
+<style>
+  .pgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .more { text-align: center; margin: 34px 0 0; }
+</style>
