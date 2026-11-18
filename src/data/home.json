@@ -173,19 +173,19 @@
     {
       "type": "shorts",
       "enabled": true,
+      "label": "YouTube Shorts",
+      "title": "Video mới nhất từ Y Đạo Thời Đại",
+      "button_link": "https://www.youtube.com/@Ydaothoidai/shorts",
       "anchor": "shorts",
       "bg": "default",
-      "label": "YouTube Shorts",
-      "title": "Video ngắn mới nhất từ Y Đạo Thời Đại",
-      "intro": "Mỗi khi kênh đăng Short mới, video sẽ tự hiện tại đây.",
+      "intro": "",
       "channel_id": "UChcZ-Nwuhs50WIaKGd1tA_Q",
-      "count": 8,
-      "button_label": "Xem thêm trên YouTube",
-      "button_link": "https://www.youtube.com/@Ydaothoidai/shorts"
+      "count": 6,
+      "button_label": "Xem thêm trên YouTube"
     },
     {
       "type": "video",
-      "enabled": true,
+      "enabled": false,
       "label": "Video",
       "title": "Y Đạo Thời Đại - Youtube Channel",
       "anchor": "video",
