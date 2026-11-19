@@ -4,7 +4,7 @@ const { s } = Astro.props;
 ---
 <SectionHead label={s.label} title={s.title} intro={s.intro} />
 <div class={`steps ${s.image ? 'with-img' : ''}`}>
-  <ol class="step-list">
+  <ol class="step-list swipe">
     {(s.items ?? []).map((it: any, i: number) => (
       <li class="step reveal">
         <span class="step-n">{i + 1}</span>

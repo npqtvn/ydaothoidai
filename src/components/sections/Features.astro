@@ -8,7 +8,7 @@ const withImage = !!s.image;
 <SectionHead label={s.label} title={s.title} intro={s.intro} />
 <div class={`feat ${withImage ? 'feat-split' : 'feat-cols'} style-${s.style || 'numbered'}`}>
   {withImage && <div class="feat-img reveal"><img src={s.image} alt={s.title} loading="lazy" /></div>}
-  <div class="feat-list">
+  <div class="feat-list swipe" style="--swipe-w:84%">
     {items.map((it: any, i: number) => (
       <article class="feat-item reveal">
         <span class="feat-num">{pad(i + 1)}</span>

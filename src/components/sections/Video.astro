@@ -9,7 +9,7 @@ const items = (s.items ?? []).map((it: any) => {
 });
 ---
 <SectionHead label={s.label} title={s.title} intro={s.intro} />
-<div class="vgrid">
+<div class="vgrid swipe" style="--swipe-w:86%">
   {items.map((it: any) => (
     <figure class="vitem reveal">
       {it.id ? (

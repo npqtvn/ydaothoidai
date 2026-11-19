@@ -8,7 +8,7 @@ const posts = (await getPosts()).slice(0, Number(s.count) || 3);
 {posts.length > 0 && (
   <>
     <SectionHead label={s.label} title={s.title} intro={s.intro} />
-    <div class="pgrid">{posts.map((p) => <PostCard p={p} />)}</div>
+    <div class="pgrid swipe">{posts.map((p) => <PostCard p={p} />)}</div>
     <p class="more"><a class="btn btn-outline" href="/bai-viet/">Xem tất cả bài viết</a></p>
   </>
 )}

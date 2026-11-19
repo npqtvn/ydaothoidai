@@ -1,22 +1,23 @@
 ---
+// Khối "Hình ảnh": mỗi mục là một ảnh, hoặc một link YouTube Short (có thể kèm ảnh bìa riêng).
+// Hiển thị thẻ dọc 9:16 giống khối YouTube Shorts; điện thoại quẹt ngang.
 import SectionHead from '../SectionHead.astro';
+import VCard from '../VCard.astro';
+import { youtubeId } from '../../lib/site';
 const { s } = Astro.props;
-const imgs = s.images ?? [];
+const items = (s.images ?? [])
+  .map((g: any) => ({ yt: youtubeId(g.youtube || ''), img: g.image || '', caption: g.caption || '' }))
+  .filter((g: any) => g.yt || g.img);
 ---
 <SectionHead label={s.label} title={s.title} intro={s.intro} />
-<div class="gal">
-  {imgs.map((g: any) => (
-    <a class="gitem reveal" href={g.image} data-cap={g.caption}>
-      <img src={g.image} alt={g.caption || ''} loading="lazy" />
-      {g.caption && <span>{g.caption}</span>}
-    </a>
-  ))}
+<div class="vcards swipe">
+  {items.map((g: any) => <VCard yt={g.yt} img={g.img} caption={g.caption} />)}
 </div>
 <dialog class="lightbox"><img alt="" /><p></p><button aria-label="Đóng">×</button></dialog>
 
 <script>
   const dlg = document.querySelector<HTMLDialogElement>('dialog.lightbox');
-  document.querySelectorAll<HTMLAnchorElement>('.gitem').forEach((a) =>
+  document.querySelectorAll<HTMLAnchorElement>('a.vcard-img').forEach((a) =>
     a.addEventListener('click', (e) => {
       if (!dlg) return;
       e.preventDefault();
@@ -29,15 +30,6 @@ const imgs = s.images ?? [];
 </script>
 
 <style>
-  .gal { columns: 4 240px; column-gap: 16px; }
-  .gitem { display: block; position: relative; margin-bottom: 16px; break-inside: avoid; border-radius: var(--radius); overflow: hidden; }
-  .gitem img { width: 100%; transition: transform .5s; }
-  .gitem:hover img { transform: scale(1.05); }
-  .gitem span {
-    position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 10px; color: #fff; font-size: .88rem; font-weight: 500;
-    background: linear-gradient(transparent, rgba(0, 0, 0, .6)); opacity: 0; transition: opacity .3s;
-  }
-  .gitem:hover span { opacity: 1; }
   .lightbox { border: 0; padding: 0; background: transparent; max-width: 92vw; max-height: 92vh; }
   .lightbox::backdrop { background: rgba(10, 16, 10, .88); }
   .lightbox img { max-width: 92vw; max-height: 84vh; border-radius: 10px; }

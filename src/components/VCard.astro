@@ -1,0 +1,20 @@
+---
+// Một thẻ dọc 9:16: là video YouTube (bấm để phát) hoặc là ảnh (bấm để phóng to).
+import Icon from './Icon.astro';
+const { yt = '', img = '', caption = '' } = Astro.props as { yt?: string; img?: string; caption?: string };
+const cover = img || (yt ? `https://i.ytimg.com/vi/${yt}/oar2.jpg` : '');
+const fallback = yt ? `this.onerror=null;this.src='https://i.ytimg.com/vi/${yt}/hqdefault.jpg'` : undefined;
+---
+<figure class="vcard reveal">
+  {yt ? (
+    <button class="vcard-media vcard-yt" data-yt={yt} aria-label={`Phát video${caption ? ': ' + caption : ''}`}>
+      {cover && <img src={cover} alt="" loading="lazy" onerror={fallback} />}
+      <span class="vcard-play"><Icon name="play" /></span>
+    </button>
+  ) : (
+    <a class="vcard-media vcard-img" href={img} data-cap={caption}>
+      <img src={img} alt={caption} loading="lazy" />
+    </a>
+  )}
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

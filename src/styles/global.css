@@ -148,3 +148,50 @@ p { margin: 0 0 1em; }
 .prose img { border-radius: var(--radius); margin: 1.2em 0; }
 .prose blockquote { margin: 1.4em 0; padding: 1em 1.4em; border-left: 4px solid var(--accent); background: var(--bg-alt); border-radius: 0 var(--radius) var(--radius) 0; }
 .prose iframe { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: var(--radius); }
+
+/* ---------- Quẹt ngang trên điện thoại ----------
+   Gắn class "swipe" vào hộp chứa danh sách (thẻ trà, bài viết, bước dùng...).
+   Máy tính: giữ nguyên lưới. Điện thoại: các thẻ xếp thành một hàng, lấy tay quẹt qua.
+   Độ rộng mỗi thẻ chỉnh bằng biến --swipe-w (mặc định 80%, để lộ một phần thẻ kế tiếp). */
+@media (max-width: 720px) {
+  .swipe {
+    display: flex !important; flex-wrap: nowrap !important; gap: 14px !important;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding: 0 20px;
+    margin-left: -20px !important; margin-right: -20px !important; padding: 4px 20px 12px !important;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .swipe::-webkit-scrollbar { display: none; }
+  .swipe > * { flex: 0 0 var(--swipe-w, 80%) !important; max-width: none !important; min-width: 0; margin: 0 !important; scroll-snap-align: start; }
+  .swipe > .reveal { opacity: 1; transform: none; }
+  .swipe-dots { display: flex; justify-content: center; gap: 6px; margin-top: 6px; }
+  .swipe-dots i { width: 7px; height: 7px; border-radius: 99px; background: color-mix(in srgb, var(--primary) 22%, transparent); transition: width .25s, background .25s; }
+  .swipe-dots i.on { width: 20px; background: var(--accent); }
+  .bg-dark .swipe-dots i { background: rgba(255, 255, 255, .3); }
+  .bg-dark .swipe-dots i.on { background: var(--accent); }
+}
+.swipe-dots { display: none; }
+@media (max-width: 720px) { .swipe-dots { display: flex; } }
+
+/* ---------- Thẻ dọc 9:16 (YouTube Shorts, Hình ảnh) ---------- */
+.vcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; --swipe-w: 62%; }
+.vcard { margin: 0; min-width: 0; }
+.vcard-media, .vcard .sframe {
+  display: block; position: relative; width: 100%; aspect-ratio: 9/16; border: 0; padding: 0; cursor: pointer;
+  border-radius: var(--radius); overflow: hidden; background: var(--primary);
+}
+.vcard-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.vcard-media:hover img { transform: scale(1.04); }
+.vcard-yt::after {
+  content: ''; position: absolute; inset: auto 0 0; height: 40%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .35)); pointer-events: none;
+}
+.vcard-play {
+  position: absolute; inset: 0; margin: auto; width: 60px; height: 60px; border-radius: 50%; z-index: 1;
+  background: var(--accent); color: #fff; display: grid; place-items: center; box-shadow: 0 0 0 8px rgba(255, 255, 255, .25);
+}
+.vcard-play svg { width: 26px; height: 26px; margin-left: 4px; }
+.vcard figcaption {
+  margin-top: 10px; font-weight: 600; color: var(--primary); font-size: .95rem; line-height: 1.4;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.bg-dark .vcard figcaption { color: #fff; }

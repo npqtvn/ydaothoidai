@@ -57,7 +57,7 @@ const steps = home.sections.find((s: any) => s.type === 'steps' && s.enabled !==
     <section class="section bg-alt">
       <div class="container">
         <div class="sec-head"><span class="sec-label">Tác dụng chính</span><h2>Công dụng của {d.title}</h2></div>
-        <div class="eff">
+        <div class="eff swipe">
           {d.effects.map((e, i) => (
             <article class="eff-item reveal"><span>{pad(i + 1)}</span><h3>{e.title}</h3><p>{e.text}</p></article>
           ))}
@@ -70,7 +70,7 @@ const steps = home.sections.find((s: any) => s.type === 'steps' && s.enabled !==
     <section class="section">
       <div class="container">
         <div class="sec-head"><span class="sec-label">Thành phần</span><h2>Các vị thuốc trong bài</h2></div>
-        <div class="ing">
+        <div class="ing swipe" style="--swipe-w:72%">
           {d.ingredients.map((g) => (
             <div class="ing-item reveal"><Icon name="leaf" /><div><strong>{g.name}</strong><span>{g.text}</span></div></div>
           ))}
@@ -84,7 +84,7 @@ const steps = home.sections.find((s: any) => s.type === 'steps' && s.enabled !==
     <section class="section bg-alt">
       <div class="container">
         <div class="sec-head"><span class="sec-label">Cách dùng</span><h2>{steps.title}</h2></div>
-        <ol class="mini-steps">
+        <ol class="mini-steps swipe">
           {steps.items.map((s: any, i: number) => <li><span>{i + 1}</span><strong>{s.title}</strong><p>{s.text}</p></li>)}
         </ol>
       </div>

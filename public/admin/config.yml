@@ -231,7 +231,7 @@ collections:
                   - { name: button_link, label: "Link nút xem thêm", widget: string, required: false }
 
               - name: gallery
-                label: "Thư viện ảnh"
+                label: "Hình ảnh & YouTube Short"
                 widget: object
                 fields:
                   - *f_enabled
@@ -241,12 +241,14 @@ collections:
                   - *f_title
                   - *f_intro
                   - name: images
-                    label: "Ảnh"
-                    label_singular: "ảnh"
+                    label: "Ảnh / video"
+                    label_singular: "ảnh hoặc video"
                     widget: list
-                    summary: "{{fields.caption}}"
+                    summary: "{{fields.caption}} {{fields.youtube}}"
+                    hint: "Mỗi mục: chọn một ảnh, HOẶC dán link YouTube Short. Trên điện thoại khách quẹt ngang để xem."
                     fields:
-                      - { name: image, label: "Ảnh", widget: image }
+                      - { name: image, label: "Ảnh (bỏ trống nếu dán link YouTube)", widget: image, required: false, hint: "Nếu có dán link YouTube thì ảnh này sẽ làm ảnh bìa cho video (không bắt buộc)." }
+                      - { name: youtube, label: "Link YouTube Short (không bắt buộc)", widget: string, required: false, hint: "Ví dụ: https://youtube.com/shorts/abc123XYZ90 — khách bấm vào sẽ phát ngay trên web." }
                       - { name: caption, label: "Chú thích", widget: string, required: false }
 
               - name: testimonials

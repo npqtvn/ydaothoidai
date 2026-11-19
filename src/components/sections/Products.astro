@@ -7,7 +7,7 @@ const products = await getProducts();
 const cols = Number(s.columns) || 3;
 ---
 <SectionHead label={s.label} title={s.title} intro={s.intro} />
-<div class="pgrid" style={`--cols:${cols}`}>
+<div class="pgrid swipe" style={`--cols:${cols};--swipe-w:78%`}>
   {products.map((p) => <ProductCard p={p} />)}
 </div>
 

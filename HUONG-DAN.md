@@ -54,6 +54,12 @@ Khối **YouTube Shorts (tự cập nhật)** trên trang chủ tự lấy các 
 
 Lưu ý: GitHub sẽ tạm dừng lịch tự build nếu kho không có thay đổi nào trong 60 ngày. Khi đó GitHub gửi email báo; bạn bấm **Enable workflow** trong tab Actions là được. Chỉ cần thỉnh thoảng bấm Save trong /admin thì lịch sẽ không bị dừng.
 
+## 4c. Khối Hình ảnh & YouTube Short, kiểu quẹt ngang
+
+- Trong khối **Hình ảnh & YouTube Short**, mỗi mục có thể là một **ảnh**, hoặc một **link YouTube Short** (dán link dạng ). Mục có link YouTube sẽ hiện thẻ dọc có nút phát, khách bấm là xem ngay trên web; muốn ảnh bìa riêng thì chọn thêm ảnh ở mục đó.
+- Trên **điện thoại**, các khối có nhiều thẻ (giới thiệu, sản phẩm, cách dùng, Shorts, hình ảnh, bài viết, video, cảm nhận, và các phần trong trang chi tiết trà) hiện thành **một hàng quẹt ngang**, có chấm báo vị trí bên dưới. Trên máy tính vẫn là dạng lưới như cũ.
+- Phần Hỏi đáp giữ dạng bấm mở từng câu, vì vốn đã gọn.
+
 ## 5. Đăng nhập trang quản trị trên web thật
 
 Vào https://npqtvn.github.io/ydaothoidai/admin/ (sau này là https://trathaomoc.ydaothoidai.com/admin/) và chọn **Sign In Using Access Token**.

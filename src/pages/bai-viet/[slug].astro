@@ -32,7 +32,7 @@ const more = (await getPosts()).filter((x) => x.id !== p.id).slice(0, 3);
     <section class="section bg-alt">
       <div class="container">
         <div class="sec-head"><span class="sec-label">Đọc thêm</span><h2>Bài viết khác</h2></div>
-        <div class="grid">{more.map((m) => <PostCard p={m} />)}</div>
+        <div class="grid swipe">{more.map((m) => <PostCard p={m} />)}</div>
       </div>
     </section>
   )}
