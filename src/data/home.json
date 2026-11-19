@@ -171,6 +171,22 @@
       ]
     },
     {
+      "type": "gallery",
+      "enabled": true,
+      "label": "",
+      "title": "Giới thiệu Trà Thảo Mộc Y Đạo Thời Đại",
+      "anchor": "",
+      "bg": "default",
+      "intro": "",
+      "images": [
+        {
+          "image": "",
+          "youtube": "",
+          "caption": ""
+        }
+      ]
+    },
+    {
       "type": "shorts",
       "enabled": true,
       "label": "YouTube Shorts",
