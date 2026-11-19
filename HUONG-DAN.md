@@ -56,7 +56,7 @@ Lưu ý: GitHub sẽ tạm dừng lịch tự build nếu kho không có thay đ
 
 ## 4c. Khối Hình ảnh & YouTube Short, kiểu quẹt ngang
 
-- Trong khối **Hình ảnh & YouTube Short**, mỗi mục có thể là một **ảnh**, hoặc một **link YouTube Short** (dán link dạng ). Mục có link YouTube sẽ hiện thẻ dọc có nút phát, khách bấm là xem ngay trên web; muốn ảnh bìa riêng thì chọn thêm ảnh ở mục đó.
+- Trong khối **Hình ảnh & YouTube Short**, mỗi mục có thể là một **ảnh**, hoặc một **link YouTube Short** (dán link dạng `https://youtube.com/shorts/...`). Mục có link YouTube sẽ hiện thẻ dọc có nút phát, khách bấm là xem ngay trên web; muốn ảnh bìa riêng thì chọn thêm ảnh ở mục đó.
 - Trên **điện thoại**, các khối có nhiều thẻ (giới thiệu, sản phẩm, cách dùng, Shorts, hình ảnh, bài viết, video, cảm nhận, và các phần trong trang chi tiết trà) hiện thành **một hàng quẹt ngang**, có chấm báo vị trí bên dưới. Trên máy tính vẫn là dạng lưới như cũ.
 - Phần Hỏi đáp giữ dạng bấm mở từng câu, vì vốn đã gọn.
 
