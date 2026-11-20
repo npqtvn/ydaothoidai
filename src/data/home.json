@@ -199,8 +199,8 @@
     {
       "type": "gallery",
       "enabled": true,
-      "label": "",
-      "title": "",
+      "label": "Youtube",
+      "title": "Video mới nhất từ Y Đạo Thời Đại",
       "anchor": "",
       "bg": "default",
       "intro": "",
@@ -235,8 +235,8 @@
     {
       "type": "shorts",
       "enabled": true,
-      "label": "YouTube Shorts",
-      "title": "Video mới nhất từ Y Đạo Thời Đại",
+      "label": "",
+      "title": "",
       "button_link": "https://www.youtube.com/@Ydaothoidai/shorts",
       "anchor": "shorts",
       "bg": "default",
